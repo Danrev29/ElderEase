@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Font sizes applied via body class */
+.text-sm { font-size: 0.875rem; } /* 14px */
+.text-base { font-size: 1rem; }   /* 16px */
+.text-lg { font-size: 1.125rem; } /* 18px */
+.text-xl { font-size: 1.25rem; }  /* 20px */
+
+/* Color contrast modes */
+.contrast-normal {
+  --bg-color: #f9fafb;
+  --text-color: #111827;
+  --primary-color: #ffffff;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.contrast-high {
+  --bg-color: #000000;
+  --text-color: #ffff00;
+  --primary-color: #ffff00;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.contrast-blue {
+  --bg-color: #eff6ff;
+  --text-color: #1e3a8a;
+  --primary-color: #1e40af;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Make links and buttons respect primary color */
+a, button {
+  color: var(--primary-color);
+}
+
+/* Font Sizes */
+.font-small { font-size: 14px; }
+.font-medium { font-size: 16px; }
+.font-large { font-size: 18px; }
+.font-xlarge { font-size: 20px; }
+
+/* Color Contrasts */
+.contrast-normal { filter: none; }
+.contrast-high { filter: contrast(150%) brightness(110%); }
+.contrast-blue { filter: brightness(90%) sepia(20%) hue-rotate(200deg); }
