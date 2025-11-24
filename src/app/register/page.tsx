@@ -70,10 +70,26 @@ export default function Register() {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-    if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: '' })
+ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  let value = e.target.value;
+
+  // Prevent numbers in name
+  if (e.target.name === "name") {
+    value = value.replace(/[0-9]/g, ""); 
   }
+
+  // Limit phone to 11 digits
+  if (e.target.name === "phone") {
+    value = value.replace(/\D/g, "").slice(0, 11);
+  }
+
+  setFormData({ ...formData, [e.target.name]: value });
+
+  if (errors[e.target.name]) {
+    setErrors({ ...errors, [e.target.name]: "" });
+  }
+};
+
 
   if (isSuccess) {
     return (

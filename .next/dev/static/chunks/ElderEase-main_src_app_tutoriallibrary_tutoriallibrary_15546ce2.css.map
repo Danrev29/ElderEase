@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/ElderEase-main/ElderEase-main/src/app/tutoriallibrary/tutoriallibrary.css"],"sourcesContent":["@keyframes modalOpen {\r\n  0% {\r\n    transform: scale(0.8);\r\n    opacity: 0;\r\n  }\r\n  100% {\r\n    transform: scale(1);\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n.animate-modalOpen {\r\n  animation: modalOpen 0.3s ease-out forwards;\r\n}\r\n"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAWA","debugId":null}}]
+}

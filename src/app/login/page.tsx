@@ -51,7 +51,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     localStorage.setItem('elderease_is_logged_in', 'true')
 
     // Redirect to profile
-    router.push('/profile')
+    router.push('/')
   } catch (err: any) {
     setError(err.message)
   } finally {

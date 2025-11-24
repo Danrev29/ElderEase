@@ -1,7 +1,5 @@
 import admin from 'firebase-admin';
-// Option 1 (relative import)
 import serviceAccountJson from './serviceAccountKey.json';
-
 import { ServiceAccount } from 'firebase-admin';
 
 const serviceAccount = serviceAccountJson as ServiceAccount;

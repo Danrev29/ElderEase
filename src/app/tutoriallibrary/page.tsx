@@ -17,7 +17,6 @@ export default function TutorialLibrary() {
 
   const [user, loading, error] = useAuthState(auth);
 
-  // Load user data from Firestore if logged in
   useEffect(() => {
     if (!user) return
 
@@ -35,7 +34,6 @@ export default function TutorialLibrary() {
     fetchUserData();
   }, [user]);
 
-  // Save user data only if logged in
   const saveUserData = async (updatedFavorites: string[], updatedCompleted: string[]) => {
     if (!user) return
     const docRef = doc(db, "users", user.uid);
@@ -69,19 +67,18 @@ export default function TutorialLibrary() {
   if (loading) return <p>Loading...</p>;
   if (!user) return <p className="text-center mt-20 text-xl">Please log in to access tutorials.</p>;
 
-  // Filter tutorials
   const filteredTutorials = tutorials.filter(t =>
     (filter === 'All' || t.category === filter) &&
     t.title.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="bg-white min-h-screen w-full p-8 relative">
+    <div className="bg-white min-h-screen w-full p-4 sm:p-8 relative">
 
       {/* Header */}
       <div className="max-w-6xl mx-auto mb-6">
-        <h1 className="text-4xl font-bold text-gray-900 mb-1">Tutorial Library</h1>
-        <p className="text-lg text-gray-600 mb-2">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-1">Tutorial Library</h1>
+        <p className="text-md sm:text-lg text-gray-600 mb-2">
           Learn social media step-by-step with easy tutorials.
         </p>
         <p className="text-sm text-gray-700 mb-6">
@@ -90,18 +87,18 @@ export default function TutorialLibrary() {
         </p>
 
         {/* Search + Filters */}
-        <div className="flex flex-wrap gap-4 mb-8 text-black relative">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8 relative">
           <input
             type="text"
             placeholder="Search tutorials..."
-            className="px-4 py-2 border rounded-lg flex-1 text-black placeholder-gray-400"
+            className="px-4 py-2 border rounded-lg flex-1 text-black placeholder-gray-400 w-full sm:w-auto"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onFocus={() => setDropdownOpen(true)}
-            onBlur={() => setTimeout(() => setDropdownOpen(false), 200)} // delay to allow click
+            onBlur={() => setTimeout(() => setDropdownOpen(false), 200)}
           />
           <select
-            className="px-4 py-2 border rounded-lg"
+            className="px-4 py-2 border rounded-lg w-full sm:w-auto"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           >
@@ -116,7 +113,7 @@ export default function TutorialLibrary() {
 
           {/* Search Dropdown */}
           {dropdownOpen && search && (
-            <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto mt-1">
+            <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto mt-1 sm:max-w-md">
               {filteredTutorials.length === 0 ? (
                 <p className="p-3 text-gray-500">No tutorials found.</p>
               ) : (
@@ -128,8 +125,8 @@ export default function TutorialLibrary() {
                   >
                     <span>{tutorial.title}</span>
                     <span className="flex gap-2">
-                      {user && favorites.includes(tutorial.id) && <span className="text-yellow-400">★</span>}
-                      {user && completed.includes(tutorial.id) && <span className="text-green-500">✔</span>}
+                      {favorites.includes(tutorial.id) && <span className="text-yellow-400">★</span>}
+                      {completed.includes(tutorial.id) && <span className="text-green-500">✔</span>}
                     </span>
                   </div>
                 ))
@@ -144,40 +141,38 @@ export default function TutorialLibrary() {
         {filteredTutorials.map(tutorial => (
           <div
             key={tutorial.id}
-            className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition cursor-pointer p-5 border border-gray-100"
+            className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition cursor-pointer p-5 border border-gray-100 flex flex-col"
             onClick={() => setSelectedTutorial(tutorial)}
           >
             <img
               src={tutorial.image}
-              className="w-full h-60  rounded-lg mb-4"
+              className="w-full h-48 sm:h-60 md:h-52 lg:h-60 rounded-lg mb-4 object-cover"
             />
-            <h2 className="text-xl font-bold text-gray-800">{tutorial.title}</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-800">{tutorial.title}</h2>
             <p className="text-gray-600 text-sm mt-1">{tutorial.description}</p>
 
             {/* Bookmark & Completed */}
-            <div className="flex justify-between items-center mt-4">
-              {/* Bookmark */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4 gap-2">
               <button
-                className={`flex items-center gap-1 px-3 py-1 rounded-lg text-sm transition ${
-                  user && favorites.includes(tutorial.id) ? 'bg-yellow-400 text-white' : 'bg-gray-200 text-gray-700'
+                className={`flex items-center gap-1 px-3 py-1 rounded-lg text-sm transition w-full sm:w-auto justify-center ${
+                  favorites.includes(tutorial.id) ? 'bg-yellow-400 text-white' : 'bg-gray-200 text-gray-700'
                 }`}
                 onClick={(e) => { e.stopPropagation(); toggleFavorite(tutorial.id) }}
                 disabled={!user}
                 title={!user ? 'Log in to bookmark' : ''}
               >
-                ★ {user && favorites.includes(tutorial.id) ? 'Bookmarked' : 'Bookmark'}
+                ★ {favorites.includes(tutorial.id) ? 'Bookmarked' : 'Bookmark'}
               </button>
 
-              {/* Completed */}
               <button
-                className={`px-3 py-1 rounded-lg text-sm transition ${
-                  user && completed.includes(tutorial.id) ? 'bg-green-500 text-white' : 'bg-gray-800 text-white'
+                className={`px-3 py-1 rounded-lg text-sm transition w-full sm:w-auto ${
+                  completed.includes(tutorial.id) ? 'bg-green-500 text-white' : 'bg-gray-800 text-white'
                 }`}
                 onClick={(e) => { e.stopPropagation(); toggleCompleted(tutorial.id) }}
                 disabled={!user}
                 title={!user ? 'Log in to mark as done' : ''}
               >
-                {user && completed.includes(tutorial.id) ? 'Completed ✔' : 'Mark as Done'}
+                {completed.includes(tutorial.id) ? 'Completed ✔' : 'Mark as Done'}
               </button>
             </div>
           </div>
@@ -187,35 +182,35 @@ export default function TutorialLibrary() {
       {/* Modal */}
       {selectedTutorial && (
         <div
-          className="fixed inset-0 flex items-center justify-center z-50 p-4 "
+          className="fixed inset-0 flex items-center justify-center z-50 p-4 bg-black/50 overflow-auto"
           onClick={() => setSelectedTutorial(null)}
         >
           <div
-            className="bg-white rounded-xl shadow-lg w-full max-w-4xl p-6 relative transform transition-all duration-300 scale-95 opacity-0 animate-modalOpen z-10 border-2 border-black"
+            className="bg-white rounded-xl shadow-lg w-full max-w-3xl sm:max-w-4xl p-6 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute top-4 right-4 text-black text-xl font-bold"
+              className="absolute top-4 right-4 text-black text-2xl font-bold"
               onClick={() => setSelectedTutorial(null)}
             >
               ×
             </button>
 
-            <h2 className="text-3xl font-bold mb-6 text-black">{selectedTutorial.title}</h2>
-            <p className="mb-6 text-black">{selectedTutorial.description}</p>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">{selectedTutorial.title}</h2>
+            <p className="mb-4">{selectedTutorial.description}</p>
 
-            {selectedTutorial.steps && selectedTutorial.steps.map((step: any, index: number) => (
-              <div key={index} className="mb-7">
-                <h3 className="font-semibold mb-4 text-black">Step {index + 1}</h3>
-                <p className="mb-4 text-black">{step.text}</p>
+            {selectedTutorial.steps?.map((step: any, index: number) => (
+              <div key={index} className="mb-5">
+                <h3 className="font-semibold mb-2">Step {index + 1}</h3>
+                <p className="mb-2">{step.text}</p>
                 {step.image && <img src={step.image} className="w-full rounded-lg mb-2" />}
               </div>
             ))}
 
             {selectedTutorial.video && (
-              <div className="mt-6">
-                <p className="font-semibold mb-2 text-black">Video Tutorial:</p>
-                <a href={selectedTutorial.video} target="_blank" className="text-blue-600 underline">
+              <div className="mt-4">
+                <p className="font-semibold mb-2">Video Tutorial:</p>
+                <a href={selectedTutorial.video} target="_blank" className="bg-red-500 text-white px-3 py-1 rounded-lg">
                   Watch on YouTube
                 </a>
               </div>
