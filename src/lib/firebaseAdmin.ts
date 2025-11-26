@@ -1,11 +1,12 @@
+// src/lib/firebaseAdmin.ts
 import admin from 'firebase-admin';
-import serviceAccountJson from './serviceAccountKey.json';
 import { ServiceAccount } from 'firebase-admin';
 
-const serviceAccount = {
-  ...serviceAccountJson,
-  private_key: serviceAccountJson.private_key.replace(/\\n/g, '\n'),
-} as ServiceAccount;
+const serviceAccount: ServiceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'), // convert \n to newlines
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+};
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -13,5 +14,4 @@ if (!admin.apps.length) {
   });
 }
 
-export const adminAuth = admin.auth();
-export const adminDb = admin.firestore();
+export default admin;
