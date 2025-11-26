@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Register() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,15 +13,14 @@ export default function Register() {
     phone: '',
     birthYear: ''
   })
-  const [errors, setErrors] = useState<{[key: string]: string}>({})
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [isLoading, setIsLoading] = useState(false)
 
   const currentYear = new Date().getFullYear()
   const birthYears = Array.from({ length: 80 }, (_, i) => currentYear - i - 10)
 
   const validateForm = () => {
-    const newErrors: {[key: string]: string} = {}
+    const newErrors: { [key: string]: string } = {}
 
     if (!formData.name.trim()) newErrors.name = 'Please enter your full name'
 
@@ -39,10 +40,10 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (validateForm()) {
       setIsLoading(true)
-      
+
       try {
         const response = await fetch('/api/auth/register', {
           method: 'POST',
@@ -55,10 +56,11 @@ export default function Register() {
         if (response.ok) {
           // Save user info locally
           localStorage.setItem('elderease_user', JSON.stringify(data.user))
-          localStorage.setItem('elderease_user_id', data.user.email) // Using email as ID
+          localStorage.setItem('elderease_user_id', data.user.email)
           localStorage.setItem('elderease_is_logged_in', 'true')
-          
-          setIsSuccess(true)
+
+          // Redirect to homepage
+          router.push('/')
         } else {
           setErrors({ email: data.error || 'Registration failed' })
         }
@@ -70,55 +72,22 @@ export default function Register() {
     }
   }
 
- const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  let value = e.target.value;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    let value = e.target.value
 
-  // Prevent numbers in name
-  if (e.target.name === "name") {
-    value = value.replace(/[0-9]/g, ""); 
-  }
+    if (e.target.name === 'name') {
+      value = value.replace(/[0-9]/g, '')
+    }
 
-  // Limit phone to 11 digits
-  if (e.target.name === "phone") {
-    value = value.replace(/\D/g, "").slice(0, 11);
-  }
+    if (e.target.name === 'phone') {
+      value = value.replace(/\D/g, '').slice(0, 11)
+    }
 
-  setFormData({ ...formData, [e.target.name]: value });
+    setFormData({ ...formData, [e.target.name]: value })
 
-  if (errors[e.target.name]) {
-    setErrors({ ...errors, [e.target.name]: "" });
-  }
-};
-
-
-  if (isSuccess) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-3xl">✅</span>
-          </div>
-          <h2 className="text-3xl font-bold text-green-800 mb-4">Welcome to ElderEase!</h2>
-          <p className="text-lg text-gray-700 mb-6">
-            Your account has been created successfully. Let's customize your experience!
-          </p>
-          <div className="space-y-3">
-            <a 
-              href="/accessibility" 
-              className="block w-full bg-green-600 text-white text-lg py-3 rounded-lg hover:bg-green-700 transition font-semibold"
-            >
-              Customize Settings
-            </a>
-            <a 
-              href="/" 
-              className="block w-full bg-blue-600 text-white text-lg py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
-            >
-              Skip to Homepage
-            </a>
-          </div>
-        </div>
-      </div>
-    )
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: '' })
+    }
   }
 
   return (
@@ -128,9 +97,9 @@ export default function Register() {
           <h2 className="text-3xl font-bold">Join ElderEase</h2>
           <p className="text-blue-100 mt-2">Create your free account to get started</p>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/** Full Name */}
+          {/* Full Name */}
           <InputField
             label="Full Name *"
             name="name"
@@ -141,7 +110,7 @@ export default function Register() {
             error={errors.name}
           />
 
-          {/** Email */}
+          {/* Email */}
           <InputField
             label="Email Address *"
             name="email"
@@ -152,7 +121,7 @@ export default function Register() {
             error={errors.email}
           />
 
-          {/** Birth Year */}
+          {/* Birth Year */}
           <div>
             <label htmlFor="birthYear" className="block text-lg font-medium text-gray-700 mb-2">
               Year of Birth *
@@ -163,18 +132,22 @@ export default function Register() {
               value={formData.birthYear}
               onChange={handleChange}
               className={`w-full px-4 py-3 text-lg border-2 rounded-lg focus:outline-none focus:ring-2 placeholder-gray-800 ${
-                errors.birthYear ? 'border-red-500 focus:ring-red-300' : 'border-gray-300 focus:ring-blue-300 focus:border-blue-500'
+                errors.birthYear
+                  ? 'border-red-500 focus:ring-red-300'
+                  : 'border-gray-300 focus:ring-blue-300 focus:border-blue-500'
               }`}
             >
               <option value="">Select your birth year</option>
               {birthYears.map(year => (
-                <option key={year} value={year}>{year}</option>
+                <option key={year} value={year}>
+                  {year}
+                </option>
               ))}
             </select>
             {errors.birthYear && <p className="mt-2 text-red-600 text-sm ">{errors.birthYear}</p>}
           </div>
 
-          {/** Phone */}
+          {/* Phone */}
           <InputField
             label="Phone Number (Optional)"
             name="phone"
@@ -184,7 +157,7 @@ export default function Register() {
             onChange={handleChange}
           />
 
-          {/** Password */}
+          {/* Password */}
           <InputField
             label="Create Password *"
             name="password"
@@ -195,7 +168,7 @@ export default function Register() {
             error={errors.password}
           />
 
-          {/** Confirm Password */}
+          {/* Confirm Password */}
           <InputField
             label="Confirm Password *"
             name="confirmPassword"
@@ -218,7 +191,10 @@ export default function Register() {
         <div className="px-6 pb-6 text-center">
           <p className="text-gray-600">
             Already have an account?{' '}
-            <a href="/login" className="text-green-600 hover:text-green-700  px-2 py-1 rounded font-semibold text-lg">
+            <a
+              href="/login"
+              className="text-green-600 hover:text-green-700 px-2 py-1 rounded font-semibold text-lg"
+            >
               Sign in here
             </a>
           </p>
@@ -236,7 +212,7 @@ function InputField({
   placeholder,
   value,
   onChange,
-  error
+  error,
 }: {
   label: string
   name: string
@@ -248,7 +224,9 @@ function InputField({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="block text-lg font-medium text-gray-700 mb-2">{label}</label>
+      <label htmlFor={name} className="block text-lg font-medium text-gray-700 mb-2">
+        {label}
+      </label>
       <input
         type={type}
         id={name}
@@ -257,7 +235,9 @@ function InputField({
         onChange={onChange}
         placeholder={placeholder}
         className={`w-full px-4 py-3 text-lg border-2 rounded-lg focus:outline-none focus:ring-2 placeholder-gray-600 ${
-          error ? 'border-red-500 focus:ring-red-300' : 'border-gray-300 focus:ring-blue-300 focus:border-blue-500'
+          error
+            ? 'border-red-500 focus:ring-red-300'
+            : 'border-gray-300 focus:ring-blue-300 focus:border-blue-500'
         }`}
       />
       {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}

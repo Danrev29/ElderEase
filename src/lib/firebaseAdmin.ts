@@ -2,7 +2,10 @@ import admin from 'firebase-admin';
 import serviceAccountJson from './serviceAccountKey.json';
 import { ServiceAccount } from 'firebase-admin';
 
-const serviceAccount = serviceAccountJson as ServiceAccount;
+const serviceAccount = {
+  ...serviceAccountJson,
+  private_key: serviceAccountJson.private_key.replace(/\\n/g, '\n'),
+} as ServiceAccount;
 
 if (!admin.apps.length) {
   admin.initializeApp({
