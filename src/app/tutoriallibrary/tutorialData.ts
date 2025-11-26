@@ -7,13 +7,13 @@ const tutorials = [
     category: "Facebook",
     image: "https://logos-world.net/wp-content/uploads/2020/04/Facebook-Logo.png",
     description: "A simple guide for new Facebook users.",
-    video: "/videos/facebook1.mp4",
+    video: "https://www.youtube.com/watch?v=EYgKPSC32Po",
     link: "https://www.facebook.com",
     steps: [
-      { text: "Go to facebook.com", image: "/tutorials/steps/fb1-step1.png" },
-      { text: "Click 'Create New Account'", image: "/tutorials/steps/fb1-step2.png" },
-      { text: "Fill out your name, email, and password", image: "/tutorials/steps/fb1-step3.png" },
-      { text: "Click 'Sign Up' and verify your account", image: "/tutorials/steps/fb1-step4.png" }
+      { text: "Go to facebook.com", image: "/placeholder.png" },
+      { text: "Click 'Create New Account'", image: "/placeholder.png" },
+      { text: "Fill out your name, email, and password", image: "/placeholder.png" },
+      { text: "Click 'Sign Up' and verify your account", image: "/placeholder.png" }
     ]
   },
   {
@@ -25,10 +25,10 @@ const tutorials = [
     video: "https://www.youtube.com/watch?v=amhjrRHqKqE",
     link: "https://www.facebook.com",
     steps: [
-      { text: "Log in to your Facebook account", image: "/tutorials/steps/fb2-step1.png" },
-      { text: "Click on 'What's on your mind?'", image: "/tutorials/steps/fb2-step2.png" },
-      { text: "Type your status or upload a photo/video", image: "/tutorials/steps/fb2-step3.png" },
-      { text: "Click 'Post' to share with friends", image: "/tutorials/steps/fb2-step4.png" }
+      { text: "Log in to your Facebook account", image: "/placeholder.png" },
+      { text: "Click on 'What's on your mind?'", image: "/placeholder.png" },
+      { text: "Type your status or upload a photo/video", image: "/placeholder.png" },
+      { text: "Click 'Post' to share with friends", image: "/placeholder.png" }
     ]
   },
   {
@@ -37,13 +37,13 @@ const tutorials = [
     category: "Facebook",
     image: "https://logos-world.net/wp-content/uploads/2020/04/Facebook-Logo.png",
     description: "Step-by-step instructions to connect with friends.",
-    video: "/videos/facebook3.mp4",
+    video: "https://www.youtube.com/watch?v=ukQm05z6HyA",
     link: "https://www.facebook.com",
     steps: [
-      { text: "Go to the 'Find Friends' section", image: "/tutorials/steps/fb3-step1.png" },
-      { text: "Search for a friend's name", image: "/tutorials/steps/fb3-step2.png" },
-      { text: "Click 'Add Friend' next to their profile", image: "/tutorials/steps/fb3-step3.png" },
-      { text: "Wait for confirmation if necessary", image: "/tutorials/steps/fb3-step4.png" }
+      { text: "Go to the 'Find Friends' section", image: "/placeholder.png" },
+      { text: "Search for a friend's name", image: "/placeholder.png" },
+      { text: "Click 'Add Friend' next to their profile", image: "/placeholder.png" },
+      { text: "Wait for confirmation if necessary", image: "/placeholder.png" }
     ]
   },
   {
@@ -52,13 +52,13 @@ const tutorials = [
     category: "Facebook",
     image: "https://logos-world.net/wp-content/uploads/2020/04/Facebook-Logo.png",
     description: "Guide for starting a page for business or community.",
-    video: "/videos/facebook4.mp4",
+    video: "https://www.youtube.com/watch?v=3-ExhqRdDZU",
     link: "https://www.facebook.com",
     steps: [
-      { text: "Log in to Facebook", image: "/tutorials/steps/fb4-step1.png" },
-      { text: "Click 'Pages' and then 'Create New Page'", image: "/tutorials/steps/fb4-step2.png" },
-      { text: "Fill in page name, category, and description", image: "/tutorials/steps/fb4-step3.png" },
-      { text: "Click 'Create Page'", image: "/tutorials/steps/fb4-step4.png" }
+      { text: "Log in to Facebook", image: "/placeholder.png" },
+      { text: "Click 'Pages' and then 'Create New Page'", image: "/placeholder.png" },
+      { text: "Fill in page name, category, and description", image: "/placeholder.png" },
+      { text: "Click 'Create Page'", image: "/placeholder.png" }
     ]
   },
   {
@@ -67,13 +67,13 @@ const tutorials = [
     category: "Facebook",
     image: "https://logos-world.net/wp-content/uploads/2020/04/Facebook-Logo.png",
     description: "Keep your account safe with simple settings.",
-    video: "/videos/facebook5.mp4",
+    video: "https://www.youtube.com/watch?v=p39YVzBhdt0",
     link: "https://www.facebook.com/settings",
     steps: [
-      { text: "Go to Settings & Privacy", image: "/tutorials/steps/fb5-step1.png" },
-      { text: "Select 'Privacy Settings'", image: "/tutorials/steps/fb5-step2.png" },
-      { text: "Adjust who can see your posts and info", image: "/tutorials/steps/fb5-step3.png" },
-      { text: "Save your changes", image: "/tutorials/steps/fb5-step4.png" }
+      { text: "Go to Settings & Privacy", image: "/placeholder.png" },
+      { text: "Select 'Privacy Settings'", image: "/placeholder.png" },
+      { text: "Adjust who can see your posts and info", image: "/placeholder.png" },
+      { text: "Save your changes", image: "/placeholder.png" }
     ]
   },
 
@@ -84,14 +84,14 @@ const tutorials = [
     category: "Instagram",
     image: "https://tse4.mm.bing.net/th/id/OIP._ZYtCLwJgEqV1bpMdAI23wHaFQ?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Step-by-step account setup for beginners.",
-    video: "/videos/instagram1.mp4",
+    video: "https://www.youtube.com/watch?v=Un96yioqlgU",
     link: "https://www.instagram.com",
     steps: [
-      { text: "Download the Instagram app", image: "/tutorials/steps/ig1-step1.png" },
-      { text: "Open the app and tap 'Sign Up'", image: "/tutorials/steps/ig1-step2.png" },
-      { text: "Enter your email or phone number", image: "/tutorials/steps/ig1-step3.png" },
-      { text: "Set a username and password", image: "/tutorials/steps/ig1-step4.png" },
-      { text: "Complete profile info and tap 'Next'", image: "/tutorials/steps/ig1-step5.png" }
+      { text: "Download the Instagram app", image: "/placeholder.png" },
+      { text: "Open the app and tap 'Sign Up'", image: "/placeholder.png" },
+      { text: "Enter your email or phone number", image: "/placeholder.png" },
+      { text: "Set a username and password", image: "/placeholder.png" },
+      { text: "Complete profile info and tap 'Next'", image: "/placeholder.png" }
     ]
   },
   {
@@ -100,14 +100,14 @@ const tutorials = [
     category: "Instagram",
     image: "https://tse4.mm.bing.net/th/id/OIP._ZYtCLwJgEqV1bpMdAI23wHaFQ?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Learn to upload and share pictures easily.",
-    video: "/videos/instagram2.mp4",
+    video: "https://www.youtube.com/watch?v=2qATrUVwBO4",
     link: "https://www.instagram.com",
     steps: [
-      { text: "Open Instagram and tap '+' button", image: "/tutorials/steps/ig2-step1.png" },
-      { text: "Select a photo from your gallery or take one", image: "/tutorials/steps/ig2-step2.png" },
-      { text: "Apply filters or edit the photo", image: "/tutorials/steps/ig2-step3.png" },
-      { text: "Add a caption and hashtags", image: "/tutorials/steps/ig2-step4.png" },
-      { text: "Tap 'Share' to post the photo", image: "/tutorials/steps/ig2-step5.png" }
+      { text: "Open Instagram and tap '+' button", image: "/placeholder.png"},
+      { text: "Select a photo from your gallery or take one", image: "/placeholder.png" },
+      { text: "Apply filters or edit the photo", image: "/placeholder.png" },
+      { text: "Add a caption and hashtags", image: "/placeholder.png" },
+      { text: "Tap 'Share' to post the photo", image: "/placeholder.png" }
     ]
   },
   {
@@ -116,13 +116,13 @@ const tutorials = [
     category: "Instagram",
     image: "https://tse4.mm.bing.net/th/id/OIP._ZYtCLwJgEqV1bpMdAI23wHaFQ?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Share moments quickly with Stories.",
-    video: "/videos/instagram3.mp4",
+    video: "https://www.youtube.com/watch?v=lWY2nE6sSwg",
     link: "https://www.instagram.com",
     steps: [
-      { text: "Tap your profile picture at the top left", image: "/tutorials/steps/ig3-step1.png" },
-      { text: "Take a photo/video or upload from gallery", image: "/tutorials/steps/ig3-step2.png" },
-      { text: "Add text, stickers, or filters", image: "/tutorials/steps/ig3-step3.png" },
-      { text: "Tap 'Your Story' to share", image: "/tutorials/steps/ig3-step4.png" }
+      { text: "Tap your profile picture at the top left", image: "/placeholder.png" },
+      { text: "Take a photo/video or upload from gallery", image: "/placeholder.png" },
+      { text: "Add text, stickers, or filters", image: "/placeholder.png" },
+      { text: "Tap 'Your Story' to share", image: "/placeholder.png" }
     ]
   },
   {
@@ -134,9 +134,9 @@ const tutorials = [
     video: "/videos/instagram4.mp4",
     link: "https://www.instagram.com",
     steps: [
-      { text: "Use the search tab to find people", image: "/tutorials/steps/ig4-step1.png" },
-      { text: "Click 'Follow' next to their profile", image: "/tutorials/steps/ig4-step2.png" },
-      { text: "Optional: Turn on notifications for new posts", image: "/tutorials/steps/ig4-step3.png" }
+      { text: "Use the search tab to find people", image: "/placeholder.png" },
+      { text: "Click 'Follow' next to their profile", image: "/placeholder.png" },
+      { text: "Optional: Turn on notifications for new posts", image: "/placeholder.png" }
     ]
   },
   {
@@ -148,7 +148,7 @@ const tutorials = [
     video: "/videos/instagram5.mp4",
     link: "https://www.instagram.com",
     steps: [
-      { text: "Tap the Reels icon", image: "/tutorials/steps/ig5-step1.png" },
+      { text: "Tap the Reels icon", image: "/placeholder.png"},
       { text: "Record or upload a video", image: "/tutorials/steps/ig5-step2.png" },
       { text: "Add music, effects, or text", image: "/tutorials/steps/ig5-step3.png" },
       { text: "Tap 'Share' to post your Reel", image: "/tutorials/steps/ig5-step4.png" }
@@ -165,11 +165,11 @@ const tutorials = [
     video: "/videos/whatsapp1.mp4",
     link: "https://www.whatsapp.com",
     steps: [
-      { text: "Open WhatsApp app", image: "/tutorials/steps/wa1-step1.png" },
-      { text: "Tap the 'Chats' tab", image: "/tutorials/steps/wa1-step2.png" },
-      { text: "Select a contact or tap 'New Chat'", image: "/tutorials/steps/wa1-step3.png" },
-      { text: "Type your message", image: "/tutorials/steps/wa1-step4.png" },
-      { text: "Tap 'Send' button", image: "/tutorials/steps/wa1-step5.png" }
+      { text: "Open WhatsApp app", image: "/placeholder.png" },
+      { text: "Tap the 'Chats' tab", image: "/placeholder.png" },
+      { text: "Select a contact or tap 'New Chat'", image: "/placeholder.png" },
+      { text: "Type your message", image: "/placeholder.png" },
+      { text: "Tap 'Send' button", image: "/placeholder.png" }
     ]
   },
   {
@@ -181,9 +181,9 @@ const tutorials = [
     video: "/videos/whatsapp2.mp4",
     link: "https://www.whatsapp.com",
     steps: [
-      { text: "Open a chat with a contact", image: "/tutorials/steps/wa2-step1.png" },
-      { text: "Tap the phone or video icon", image: "/tutorials/steps/wa2-step2.png" },
-      { text: "Wait for the call to connect", image: "/tutorials/steps/wa2-step3.png" }
+      { text: "Open a chat with a contact", image: "/placeholder.png" },
+      { text: "Tap the phone or video icon", image: "/placeholder.png" },
+      { text: "Wait for the call to connect", image: "/placeholder.png" }
     ]
   },
   {
@@ -195,10 +195,10 @@ const tutorials = [
     video: "/videos/whatsapp3.mp4",
     link: "https://www.whatsapp.com",
     steps: [
-      { text: "Go to the 'Chats' tab", image: "/tutorials/steps/wa3-step1.png" },
-      { text: "Tap 'New Group'", image: "/tutorials/steps/wa3-step2.png" },
-      { text: "Select participants and tap 'Next'", image: "/tutorials/steps/wa3-step3.png" },
-      { text: "Give the group a name and create it", image: "/tutorials/steps/wa3-step4.png" }
+      { text: "Go to the 'Chats' tab", image: "/placeholder.png" },
+      { text: "Tap 'New Group'", image: "/placeholder.png" },
+      { text: "Select participants and tap 'Next'", image: "/placeholder.png" },
+      { text: "Give the group a name and create it", image: "/placeholder.png" }
     ]
   },
   {
@@ -210,9 +210,9 @@ const tutorials = [
     video: "/videos/whatsapp4.mp4",
     link: "https://www.whatsapp.com",
     steps: [
-      { text: "Open a chat", image: "/tutorials/steps/wa4-step1.png" },
-      { text: "Hold the microphone icon", image: "/tutorials/steps/wa4-step2.png" },
-      { text: "Record your message and release to send", image: "/tutorials/steps/wa4-step3.png" }
+      { text: "Open a chat", image: "/placeholder.png" },
+      { text: "Hold the microphone icon", image: "/placeholder.png" },
+      { text: "Record your message and release to send", image: "/placeholder.png" }
     ]
   },
   {
@@ -224,10 +224,10 @@ const tutorials = [
     video: "/videos/whatsapp5.mp4",
     link: "https://www.whatsapp.com",
     steps: [
-      { text: "Open the chat", image: "/tutorials/steps/wa5-step1.png" },
-      { text: "Tap the attachment icon", image: "/tutorials/steps/wa5-step2.png" },
-      { text: "Select the file/photo/video", image: "/tutorials/steps/wa5-step3.png" },
-      { text: "Tap 'Send'", image: "/tutorials/steps/wa5-step4.png" }
+      { text: "Open the chat", image: "/placeholder.png" },
+      { text: "Tap the attachment icon", image: "/placeholder.png" },
+      { text: "Select the file/photo/video", image: "/placeholder.png" },
+      { text: "Tap 'Send'", image: "/placeholder.png" }
     ]
   },
 
@@ -241,10 +241,10 @@ const tutorials = [
     video: "/videos/messenger1.mp4",
     link: "https://www.messenger.com",
     steps: [
-      { text: "Open Messenger app", image: "/tutorials/steps/ms1-step1.png" },
-      { text: "Tap 'New Message'", image: "/tutorials/steps/ms1-step2.png" },
-      { text: "Select a contact", image: "/tutorials/steps/ms1-step3.png" },
-      { text: "Type your message and send", image: "/tutorials/steps/ms1-step4.png" }
+      { text: "Open Messenger app", image: "/placeholder.png" },
+      { text: "Tap 'New Message'", image: "/placeholder.png" },
+      { text: "Select a contact", image: "/placeholder.png" },
+      { text: "Type your message and send", image: "/placeholder.png" }
     ]
   },
   {
@@ -256,9 +256,9 @@ const tutorials = [
     video: "/videos/messenger2.mp4",
     link: "https://www.messenger.com",
     steps: [
-      { text: "Open a chat", image: "/tutorials/steps/ms2-step1.png" },
-      { text: "Tap the video icon", image: "/tutorials/steps/ms2-step2.png" },
-      { text: "Wait for the call to connect", image: "/tutorials/steps/ms2-step3.png" }
+      { text: "Open a chat", image: "/placeholder.png" },
+      { text: "Tap the video icon", image: "/placeholder.png" },
+      { text: "Wait for the call to connect", image: "/placeholder.png" }
     ]
   },
   {
@@ -270,9 +270,9 @@ const tutorials = [
     video: "/videos/messenger3.mp4",
     link: "https://www.messenger.com",
     steps: [
-      { text: "Open a chat", image: "/tutorials/steps/ms3-step1.png" },
-      { text: "Tap the sticker icon", image: "/tutorials/steps/ms3-step2.png" },
-      { text: "Select a sticker to send", image: "/tutorials/steps/ms3-step3.png" }
+      { text: "Open a chat", image: "/placeholder.png" },
+      { text: "Tap the sticker icon", image: "/placeholder.png" },
+      { text: "Select a sticker to send", image: "/placeholder.png" }
     ]
   },
   {
@@ -284,9 +284,9 @@ const tutorials = [
     video: "/videos/messenger4.mp4",
     link: "https://www.messenger.com",
     steps: [
-      { text: "Tap 'New Group'", image: "/tutorials/steps/ms4-step1.png" },
-      { text: "Add participants", image: "/tutorials/steps/ms4-step2.png" },
-      { text: "Name your group and create it", image: "/tutorials/steps/ms4-step3.png" }
+      { text: "Tap 'New Group'", image: "/placeholder.png" },
+      { text: "Add participants", image: "/placeholder.png" },
+      { text: "Name your group and create it", image: "/placeholder.png" }
     ]
   },
   {
@@ -298,9 +298,9 @@ const tutorials = [
     video: "/videos/messenger5.mp4",
     link: "https://www.messenger.com",
     steps: [
-      { text: "Go to Settings > Notifications", image: "/tutorials/steps/ms5-step1.png" },
-      { text: "Toggle notification settings", image: "/tutorials/steps/ms5-step2.png" },
-      { text: "Save your preferences", image: "/tutorials/steps/ms5-step3.png" }
+      { text: "Go to Settings > Notifications", image: "/placeholder.png" },
+      { text: "Toggle notification settings", image: "/placeholder.png" },
+      { text: "Save your preferences", image: "/placeholder.png" }
     ]
   },
 
@@ -314,10 +314,10 @@ const tutorials = [
   video: "/videos/youtube1.mp4",
   link: "https://www.youtube.com",
   steps: [
-    { text: "Go to youtube.com or open the app", image: "/tutorials/steps/yt1-step1.png" },
-    { text: "Use the search bar at the top", image: "/tutorials/steps/yt1-step2.png" },
-    { text: "Type keywords for the video", image: "/tutorials/steps/yt1-step3.png" },
-    { text: "Press Enter or tap Search to see results", image: "/tutorials/steps/yt1-step4.png" }
+    { text: "Go to youtube.com or open the app", image: "/placeholder.png" },
+    { text: "Use the search bar at the top", image: "/placeholder.png" },
+    { text: "Type keywords for the video", image: "/placeholder.png" },
+    { text: "Press Enter or tap Search to see results", image: "/placeholder.png" }
   ]
 },
 {
@@ -329,9 +329,9 @@ const tutorials = [
   video: "/videos/youtube2.mp4",
   link: "https://www.youtube.com",
   steps: [
-    { text: "Open a video from the channel", image: "/tutorials/steps/yt2-step1.png" },
-    { text: "Click the 'Subscribe' button below the video", image: "/tutorials/steps/yt2-step2.png" },
-    { text: "Optional: Click the bell icon for notifications", image: "/tutorials/steps/yt2-step3.png" }
+    { text: "Open a video from the channel", image: "/placeholder.png" },
+    { text: "Click the 'Subscribe' button below the video", image: "/placeholder.png" },
+    { text: "Optional: Click the bell icon for notifications", image: "/placeholder.png" }
   ]
 },
 {
@@ -343,10 +343,10 @@ const tutorials = [
   video: "/videos/youtube3.mp4",
   link: "https://www.youtube.com",
   steps: [
-    { text: "Open a YouTube video", image: "/tutorials/steps/yt3-step1.png" },
-    { text: "Click the thumbs up icon to like", image: "/tutorials/steps/yt3-step2.png" },
-    { text: "Scroll down to comments and type your message", image: "/tutorials/steps/yt3-step3.png" },
-    { text: "Click 'Comment' to post it", image: "/tutorials/steps/yt3-step4.png" }
+    { text: "Open a YouTube video", image: "/placeholder.png" },
+    { text: "Click the thumbs up icon to like", image: "/placeholder.png" },
+    { text: "Scroll down to comments and type your message", image: "/placeholder.png" },
+    { text: "Click 'Comment' to post it", image: "/placeholder.png" }
   ]
 },
 {
@@ -358,10 +358,10 @@ const tutorials = [
   video: "/videos/youtube4.mp4",
   link: "https://www.youtube.com",
   steps: [
-    { text: "Click 'Save' below a video", image: "/tutorials/steps/yt4-step1.png" },
-    { text: "Choose an existing playlist or 'Create new playlist'", image: "/tutorials/steps/yt4-step2.png" },
-    { text: "Name your playlist and set privacy", image: "/tutorials/steps/yt4-step3.png" },
-    { text: "Click 'Create' to save", image: "/tutorials/steps/yt4-step4.png" }
+    { text: "Click 'Save' below a video", image: "/placeholder.png" },
+    { text: "Choose an existing playlist or 'Create new playlist'", image: "/placeholder.png" },
+    { text: "Name your playlist and set privacy", image: "/placeholder.png" },
+    { text: "Click 'Create' to save", image: "/placeholder.png" }
   ]
 },
 {
@@ -373,11 +373,11 @@ const tutorials = [
   video: "/videos/youtube5.mp4",
   link: "https://www.youtube.com",
   steps: [
-    { text: "Click the camera icon with '+'", image: "/tutorials/steps/yt5-step1.png" },
-    { text: "Select 'Upload video'", image: "/tutorials/steps/yt5-step2.png" },
-    { text: "Choose the file from your device", image: "/tutorials/steps/yt5-step3.png" },
-    { text: "Add title, description, and settings", image: "/tutorials/steps/yt5-step4.png" },
-    { text: "Click 'Publish' to upload", image: "/tutorials/steps/yt5-step5.png" }
+    { text: "Click the camera icon with '+'", image: "/placeholder.png"},
+    { text: "Select 'Upload video'", image: "/placeholder.png" },
+    { text: "Choose the file from your device", image: "/placeholder.png" },
+    { text: "Add title, description, and settings", image: "/placeholder.png" },
+    { text: "Click 'Publish' to upload", image: "/placeholder.png" }
   ]
 },
 
@@ -391,10 +391,10 @@ const tutorials = [
   video: "/videos/tiktok1.mp4",
   link: "https://www.tiktok.com",
   steps: [
-    { text: "Download TikTok from App Store/Play Store", image: "/tutorials/steps/tt1-step1.png" },
-    { text: "Open TikTok and tap 'Sign Up'", image: "/tutorials/steps/tt1-step2.png" },
-    { text: "Use phone, email, or social media to register", image: "/tutorials/steps/tt1-step3.png" },
-    { text: "Set a username and password", image: "/tutorials/steps/tt1-step4.png" }
+    { text: "Download TikTok from App Store/Play Store", image: "/placeholder.png" },
+    { text: "Open TikTok and tap 'Sign Up'", image: "/placeholder.png" },
+    { text: "Use phone, email, or social media to register", image: "/placeholder.png" },
+    { text: "Set a username and password", image: "/placeholder.png" }
   ]
 },
 {
@@ -406,10 +406,10 @@ const tutorials = [
   video: "/videos/tiktok2.mp4",
   link: "https://www.tiktok.com",
   steps: [
-    { text: "Tap '+' at the bottom", image: "/tutorials/steps/tt2-step1.png" },
-    { text: "Record a video or select from gallery", image: "/tutorials/steps/tt2-step2.png" },
-    { text: "Edit video, add effects, music, and captions", image: "/tutorials/steps/tt2-step3.png" },
-    { text: "Tap 'Post' to share", image: "/tutorials/steps/tt2-step4.png" }
+    { text: "Tap '+' at the bottom", image: "/placeholder.png" },
+    { text: "Record a video or select from gallery", image: "/placeholder.png" },
+    { text: "Edit video, add effects, music, and captions", image: "/placeholder.png" },
+    { text: "Tap 'Post' to share", image: "/placeholder.png" }
   ]
 },
 {
@@ -421,9 +421,9 @@ const tutorials = [
   video: "/videos/tiktok3.mp4",
   link: "https://www.tiktok.com",
   steps: [
-    { text: "Open TikTok and search for a user", image: "/tutorials/steps/tt3-step1.png" },
-    { text: "Go to their profile", image: "/tutorials/steps/tt3-step2.png" },
-    { text: "Tap 'Follow'", image: "/tutorials/steps/tt3-step3.png" }
+    { text: "Open TikTok and search for a user", image: "/placeholder.png" },
+    { text: "Go to their profile", image: "/placeholder.png" },
+    { text: "Tap 'Follow'", image: "/placeholder.png" }
   ]
 },
 {
@@ -435,9 +435,9 @@ const tutorials = [
   video: "/videos/tiktok4.mp4",
   link: "https://www.tiktok.com",
   steps: [
-    { text: "Watch a video", image: "/tutorials/steps/tt4-step1.png" },
-    { text: "Tap the heart to like", image: "/tutorials/steps/tt4-step2.png" },
-    { text: "Tap the comment icon to write a comment", image: "/tutorials/steps/tt4-step3.png" }
+    { text: "Watch a video", image: "/placeholder.png" },
+    { text: "Tap the heart to like", image: "/placeholder.png" },
+    { text: "Tap the comment icon to write a comment", image: "/placeholder.png" }
   ]
 },
 {
@@ -449,10 +449,10 @@ const tutorials = [
   video: "/videos/tiktok5.mp4",
   link: "https://www.tiktok.com",
   steps: [
-    { text: "Open the TikTok camera", image: "/tutorials/steps/tt5-step1.png" },
-    { text: "Tap 'Effects'", image: "/tutorials/steps/tt5-step2.png" },
-    { text: "Select the desired effect", image: "/tutorials/steps/tt5-step3.png" },
-    { text: "Record or apply effect to your video", image: "/tutorials/steps/tt5-step4.png" }
+    { text: "Open the TikTok camera", image: "/placeholder.png" },
+    { text: "Tap 'Effects'", image: "/placeholder.png" },
+    { text: "Select the desired effect", image: "/placeholder.png" },
+    { text: "Record or apply effect to your video", image: "/placeholder.png" }
   ]
 },
 
@@ -467,10 +467,10 @@ const tutorials = [
   video: "/videos/x1.mp4",
   link: "https://www.x.com",
   steps: [
-    { text: "Go to x.com or open the app", image: "/tutorials/steps/x1-step1.png" },
-    { text: "Click 'Sign Up' and enter your details", image: "/tutorials/steps/x1-step2.png" },
-    { text: "Set username and password", image: "/tutorials/steps/x1-step3.png" },
-    { text: "Verify your email or phone number", image: "/tutorials/steps/x1-step4.png" }
+    { text: "Go to x.com or open the app", image: "/placeholder.png" },
+    { text: "Click 'Sign Up' and enter your details", image: "/placeholder.png" },
+    { text: "Set username and password", image: "/placeholder.png" },
+    { text: "Verify your email or phone number", image: "/placeholder.png" }
   ]
 },
 {
@@ -482,9 +482,9 @@ const tutorials = [
   video: "/videos/x2.mp4",
   link: "https://www.x.com",
   steps: [
-    { text: "Click the Post button", image: "/tutorials/steps/x2-step1.png" },
-    { text: "Type your message or add media", image: "/tutorials/steps/x2-step2.png" },
-    { text: "Click 'Post' to share", image: "/tutorials/steps/x2-step3.png" }
+    { text: "Click the Post button", image: "/placeholder.png" },
+    { text: "Type your message or add media", image: "/placeholder.png" },
+    { text: "Click 'Post' to share", image: "/placeholder.png" }
   ]
 },
 {
@@ -496,8 +496,8 @@ const tutorials = [
   video: "/videos/x3.mp4",
   link: "https://www.x.com",
   steps: [
-    { text: "Click the Repost icon to share", image: "/tutorials/steps/x3-step1.png" },
-    { text: "Click the heart to like a post", image: "/tutorials/steps/x3-step2.png" }
+    { text: "Click the Repost icon to share", image: "/placeholder.png" },
+    { text: "Click the heart to like a post", image: "/placeholder.png" }
   ]
 },
 {
@@ -509,8 +509,8 @@ const tutorials = [
   video: "/videos/x4.mp4",
   link: "https://www.x.com",
   steps: [
-    { text: "Search for an account", image: "/tutorials/steps/x4-step1.png" },
-    { text: "Go to profile and click 'Follow'", image: "/tutorials/steps/x4-step2.png" }
+    { text: "Search for an account", image: "/placeholder.png" },
+    { text: "Go to profile and click 'Follow'", image: "/placeholder.png" }
   ]
 },
 {
@@ -522,8 +522,8 @@ const tutorials = [
   video: "/videos/x5.mp4",
   link: "https://www.x.com",
   steps: [
-    { text: "Add '#' before keywords in posts", image: "/tutorials/steps/x5-step1.png" },
-    { text: "Click hashtags to explore topics", image: "/tutorials/steps/x5-step2.png" }
+    { text: "Add '#' before keywords in posts", image: "/placeholder.png" },
+    { text: "Click hashtags to explore topics", image: "/placeholder.png" }
   ]
 },
 
@@ -540,10 +540,10 @@ const tutorials = [
   video: "/videos/snapchat1.mp4",
   link: "https://www.snapchat.com",
   steps: [
-    { text: "Download Snapchat and tap Sign Up", image: "/tutorials/steps/sc1-step1.png" },
-    { text: "Enter name, email, and birthday", image: "/tutorials/steps/sc1-step2.png" },
-    { text: "Create username and password", image: "/tutorials/steps/sc1-step3.png" },
-    { text: "Verify account via email/phone", image: "/tutorials/steps/sc1-step4.png" }
+    { text: "Download Snapchat and tap Sign Up", image: "/placeholder.png" },
+    { text: "Enter name, email, and birthday", image: "/placeholder.png" },
+    { text: "Create username and password", image: "/placeholder.png" },
+    { text: "Verify account via email/phone", image: "/placeholder.png" }
   ]
 },
 {
@@ -555,9 +555,9 @@ const tutorials = [
   video: "/videos/snapchat2.mp4",
   link: "https://www.snapchat.com",
   steps: [
-    { text: "Open Snapchat and tap 'Add Friends'", image: "/tutorials/steps/sc2-step1.png" },
-    { text: "Search by username or scan Snapcode", image: "/tutorials/steps/sc2-step2.png" },
-    { text: "Tap '+' to add", image: "/tutorials/steps/sc2-step3.png" }
+    { text: "Open Snapchat and tap 'Add Friends'", image: "/placeholder.png" },
+    { text: "Search by username or scan Snapcode", image: "/placeholder.png" },
+    { text: "Tap '+' to add", image: "/placeholder.png" }
   ]
 },
 {
@@ -569,9 +569,9 @@ const tutorials = [
   video: "/videos/snapchat3.mp4",
   link: "https://www.snapchat.com",
   steps: [
-    { text: "Take a photo or video with the camera", image: "/tutorials/steps/sc3-step1.png" },
-    { text: "Tap the arrow to send", image: "/tutorials/steps/sc3-step2.png" },
-    { text: "Select recipients and send", image: "/tutorials/steps/sc3-step3.png" }
+    { text: "Take a photo or video with the camera", image: "/placeholder.png" },
+    { text: "Tap the arrow to send", image: "/placeholder.png" },
+    { text: "Select recipients and send", image: "/placeholder.png" }
   ]
 },
 {
@@ -583,9 +583,9 @@ const tutorials = [
   video: "/videos/snapchat4.mp4",
   link: "https://www.snapchat.com",
   steps: [
-    { text: "Swipe left or right to apply filters", image: "/tutorials/steps/sc4-step1.png" },
-    { text: "Tap to add stickers or text", image: "/tutorials/steps/sc4-step2.png" },
-    { text: "Send your snap", image: "/tutorials/steps/sc4-step3.png" }
+    { text: "Swipe left or right to apply filters", image: "/placeholder.png" },
+    { text: "Tap to add stickers or text", image: "/placeholder.png" },
+    { text: "Send your snap", image: "/placeholder.png" }
   ]
 },
 {
@@ -597,9 +597,9 @@ const tutorials = [
   video: "/videos/snapchat5.mp4",
   link: "https://www.snapchat.com",
   steps: [
-    { text: "Open chat from friends list", image: "/tutorials/steps/sc5-step1.png" },
-    { text: "Type your message or send stickers", image: "/tutorials/steps/sc5-step2.png" },
-    { text: "Tap send to deliver", image: "/tutorials/steps/sc5-step3.png" }
+    { text: "Open chat from friends list", image: "/placeholder.png" },
+    { text: "Type your message or send stickers", image: "/placeholder.png" },
+    { text: "Tap send to deliver", image: "/placeholder.png" }
   ]
 },
 

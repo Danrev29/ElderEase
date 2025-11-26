@@ -14,13 +14,27 @@ export default function TutorialLibrary() {
   const [completed, setCompleted] = useState<string[]>([])
   const [selectedTutorial, setSelectedTutorial] = useState<any>(null)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [loadingData, setLoadingData] = useState(true) // New loading state
 
   const [user, loading, error] = useAuthState(auth);
 
+  // Modal effect
   useEffect(() => {
-    if (!user) return
+    if (selectedTutorial) {
+      setModalVisible(true);
+    } else {
+      const timer = setTimeout(() => setModalVisible(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedTutorial]);
+
+  // Fetch user data (once when user logs in)
+  useEffect(() => {
+    if (!user) return;
 
     const fetchUserData = async () => {
+      setLoadingData(true)
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -30,6 +44,7 @@ export default function TutorialLibrary() {
       } else {
         await setDoc(docRef, { favorites: [], completed: [] });
       }
+      setLoadingData(false)
     };
     fetchUserData();
   }, [user]);
@@ -64,7 +79,23 @@ export default function TutorialLibrary() {
     await saveUserData(favorites, updated);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading || loadingData) return (
+    <div className="p-4 sm:p-8 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {/* Skeleton cards */}
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div key={i} className="animate-pulse flex flex-col gap-3 p-5 rounded-xl bg-gray-100 h-72">
+          <div className="bg-gray-300 h-36 rounded-lg w-full"></div>
+          <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+          <div className="h-4 bg-gray-300 rounded w-full"></div>
+          <div className="flex gap-2 mt-auto">
+            <div className="h-8 w-1/2 bg-gray-300 rounded"></div>
+            <div className="h-8 w-1/2 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
   if (!user) return <p className="text-center mt-20 text-xl">Please log in to access tutorials.</p>;
 
   const filteredTutorials = tutorials.filter(t =>
@@ -141,11 +172,16 @@ export default function TutorialLibrary() {
         {filteredTutorials.map(tutorial => (
           <div
             key={tutorial.id}
-            className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition cursor-pointer p-5 border border-gray-100 flex flex-col"
+            className={`rounded-xl cursor-pointer p-5 flex flex-col transition shadow-lg hover:shadow-2xl border
+              ${completed.includes(tutorial.id)
+                ? 'border-green-500 bg-green-50 shadow-green-300 shadow-lg'
+                : 'bg-white border-gray-100'
+              }
+            `}
             onClick={() => setSelectedTutorial(tutorial)}
           >
             <img
-              src={tutorial.image}
+              src={tutorial.image || '/placeholder.png'} // fallback placeholder
               className="w-full h-48 sm:h-60 md:h-52 lg:h-60 rounded-lg mb-4 object-cover"
             />
             <h2 className="text-lg sm:text-xl font-bold text-gray-800">{tutorial.title}</h2>
@@ -159,18 +195,16 @@ export default function TutorialLibrary() {
                 }`}
                 onClick={(e) => { e.stopPropagation(); toggleFavorite(tutorial.id) }}
                 disabled={!user}
-                title={!user ? 'Log in to bookmark' : ''}
               >
                 ★ {favorites.includes(tutorial.id) ? 'Bookmarked' : 'Bookmark'}
               </button>
 
               <button
                 className={`px-3 py-1 rounded-lg text-sm transition w-full sm:w-auto ${
-                  completed.includes(tutorial.id) ? 'bg-green-500 text-white' : 'bg-gray-800 text-white'
+                  completed.includes(tutorial.id) ? 'bg-green-500 text-white' : 'bg-blue-600 text-white'
                 }`}
                 onClick={(e) => { e.stopPropagation(); toggleCompleted(tutorial.id) }}
                 disabled={!user}
-                title={!user ? 'Log in to mark as done' : ''}
               >
                 {completed.includes(tutorial.id) ? 'Completed ✔' : 'Mark as Done'}
               </button>
@@ -186,35 +220,48 @@ export default function TutorialLibrary() {
           onClick={() => setSelectedTutorial(null)}
         >
           <div
-            className="bg-white rounded-xl shadow-lg w-full max-w-3xl sm:max-w-4xl p-6 relative"
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl sm:max-w-4xl p-6 relative transform transition-all duration-300 overflow-y-auto max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute top-4 right-4 text-black text-2xl font-bold"
+              className="absolute top-4 right-4 text-gray-700 hover:text-black text-3xl font-bold transition"
               onClick={() => setSelectedTutorial(null)}
             >
               ×
             </button>
 
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">{selectedTutorial.title}</h2>
-            <p className="mb-4">{selectedTutorial.description}</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">{selectedTutorial.title}</h2>
+            <p className="text-gray-700 mb-6">{selectedTutorial.description}</p>
 
+            {/* Steps */}
             {selectedTutorial.steps?.map((step: any, index: number) => (
-              <div key={index} className="mb-5">
-                <h3 className="font-semibold mb-2">Step {index + 1}</h3>
-                <p className="mb-2">{step.text}</p>
-                {step.image && <img src={step.image} className="w-full rounded-lg mb-2" />}
+              <div
+                key={index}
+                className="mb-5 p-4 bg-gray-50 rounded-lg border-l-4 border-blue-500 shadow-sm flex flex-col gap-2"
+              >
+                <h3 className="font-semibold text-lg flex items-center gap-2">
+                  <span className="text-blue-500 font-bold">{index + 1}.</span> {step.title || `Step ${index + 1}`}
+                </h3>
+                <p className="text-gray-700">{step.text}</p>
+               
               </div>
             ))}
 
-            {selectedTutorial.video && (
-              <div className="mt-4">
-                <p className="font-semibold mb-2">Video Tutorial:</p>
-                <a href={selectedTutorial.video} target="_blank" className="bg-red-500 text-white px-3 py-1 rounded-lg">
-                  Watch on YouTube
-                </a>
-              </div>
-            )}
+          {selectedTutorial.video && (
+  <div className="mt-6">
+    <p className="font-semibold text-gray-800 mb-2">Video Tutorial:</p>
+    <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px]">
+      <iframe
+        className="w-full h-full rounded-lg"
+        src={selectedTutorial.video.replace("watch?v=", "embed/")}
+        title={selectedTutorial.title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
+  </div>
+)}
+
           </div>
         </div>
       )}

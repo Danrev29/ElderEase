@@ -15,6 +15,7 @@ export default function Accessibility() {
           </div>
 
           <div className="p-6 space-y-6">
+
             {/* Text Size */}
             <div className="border border-gray-200 rounded-lg p-4">
               <label className="text-lg font-medium text-gray-800 mb-2 block">
@@ -55,8 +56,11 @@ export default function Accessibility() {
                   <label className="text-lg font-medium text-gray-800 block">
                     Voice Commands
                   </label>
-                  <p className="text-gray-600 text-sm">Enable voice input and navigation</p>
+                  <p className="text-gray-600 text-sm">
+                    Enable voice input and navigation
+                  </p>
                 </div>
+
                 <button
                   onClick={() => setSettings({ voiceEnabled: !voiceEnabled })}
                   className={`w-12 h-6 rounded-full transition-colors ${
@@ -70,7 +74,39 @@ export default function Accessibility() {
                   />
                 </button>
               </div>
+
+              {/* 🎤 Command List */}
+              {voiceEnabled && (
+                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-blue-800">Available Voice Commands:</h3>
+
+                  <ul className="text-sm text-blue-900 mt-2 space-y-1">
+                    <li>• <strong>“Go home”</strong> — Navigate to homepage</li>
+                    <li>• <strong>“Open profile”</strong> — Navigate to profile</li>
+                    <li>• <strong>“Open settings”</strong> — Open accessibility settings</li>
+                    <li>• <strong>“Open tutorials”</strong> — Open tutorial library</li>
+
+                    <li className="mt-2">• <strong>“Bigger text”</strong> — Increase text size</li>
+                    <li>• <strong>“Largest text”</strong> — Extra large text</li>
+                    <li>• <strong>“Medium text”</strong> — Reset text size</li>
+                    <li>• <strong>“Smaller text”</strong> — Small text</li>
+
+                    <li className="mt-2">• <strong>“High contrast”</strong> — Enable high contrast</li>
+                    <li>• <strong>“Normal contrast”</strong> — Default colors</li>
+                    <li>• <strong>“Blue light”</strong> — Enable blue light filter</li>
+
+                    <li className="mt-2">• <strong>“Stop listening”</strong> — Disable voice commands</li>
+                  </ul>
+                </div>
+              )}
+
+              {voiceEnabled && (
+                <p className="mt-3 text-sm text-green-600 font-medium">
+                  🎤 Voice commands active
+                </p>
+              )}
             </div>
+
           </div>
         </div>
       </div>

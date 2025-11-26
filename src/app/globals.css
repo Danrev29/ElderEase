@@ -57,7 +57,7 @@ body {
 }
 
 /* Make links and buttons respect primary color */
-a, button {
+nav a {
   color: var(--primary-color);
 }
 

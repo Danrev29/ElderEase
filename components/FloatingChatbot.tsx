@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import tutorials from '@/app/tutoriallibrary/tutorialData'
+import { getTutorialAnswer } from '@/app/tutoriallibrary/tutorialUtils'
 
 interface Message {
   id: string
@@ -25,12 +27,29 @@ export default function FloatingChatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // Quick questions and mapped answers
+  const quickQuestions = [
+    "How to post on Facebook?",
+    "Send photos on WhatsApp",
+    "Video call my family",
+    "What is Instagram?",
+    "Make my account safe"
+  ]
+
+  const quickAnswers: { [key: string]: string } = {
+    "how to post on facebook?": getTutorialAnswer("facebook", "post status"),
+    "send photos on whatsapp": getTutorialAnswer("whatsapp", "send photo"),
+    "video call my family": getTutorialAnswer("video call"),
+    "what is instagram?": getTutorialAnswer("instagram"),
+    "make my account safe": "To keep your account safe: 1) Use a strong password, 2) Enable two-factor authentication, 3) Avoid sharing personal info, 4) Keep your apps updated."
+  }
 
   const handleSend = async () => {
     if (!inputText.trim()) return
@@ -46,32 +65,32 @@ export default function FloatingChatbot() {
     setInputText('')
     setIsLoading(true)
 
-    // Simulate AI response
     setTimeout(() => {
-      const responses = [
-        "I can help with that! Let me guide you step by step.",
-        "That's a great question! Here's how you can do it:",
-        "Many seniors find this helpful. Here's the process:",
-        "I understand this can be confusing. Let me break it down for you:",
-        "Perfect! I'll walk you through this in simple steps."
-      ]
-
-      const socialMediaTips: { [key: string]: string } = {
-        'facebook': "On Facebook, you can: 1) Click 'What's on your mind?' to post, 2) Use the camera icon to share photos, 3) Click the heart icon to like posts",
-        'whatsapp': "In WhatsApp: 1) Tap the chat to message, 2) Use the paperclip to send photos, 3) Tap the phone icon for calls",
-        'instagram': "For Instagram: 1) Tap + to share photos, 2) Heart icons show likes, 3) Use the search magnifying glass to find people",
-        'video call': "For video calls: 1) In Facebook Messenger, tap the video camera, 2) In WhatsApp, tap the video camera in a chat, 3) Make sure you allow camera access",
-        'photo': "To share photos: 1) Tap the photo/gallery icon, 2) Select your photos, 3) Tap send/share button"
-      }
-
       const userText = inputText.toLowerCase()
-      let response = responses[Math.floor(Math.random() * responses.length)]
-      
-      // Add specific tips based on keywords
-      for (const [keyword, tip] of Object.entries(socialMediaTips)) {
-        if (userText.includes(keyword)) {
-          response += `\n\n${tip}`
-          break
+      let response = ''
+
+      // Check quickAnswers first
+      response = quickAnswers[userText] || ''
+
+      // If not a quick answer, try tutorial matching
+      if (!response) {
+        // Match tutorial by platform and specific topic keywords
+        const matchedTutorial = tutorials.find(t =>
+          userText.includes(t.category.toLowerCase()) ||
+          t.steps.some(step => userText.includes(step.text.toLowerCase()))
+        )
+
+        if (matchedTutorial) {
+          response = getTutorialAnswer(
+            matchedTutorial.category,
+            userText
+          )
+        } else {
+          // fallback generic response
+          const responses = [
+            "Sorry, I couldn't find a tutorial for that. Try another question or platform."
+          ]
+          response = responses[Math.floor(Math.random() * responses.length)]
         }
       }
 
@@ -84,7 +103,7 @@ export default function FloatingChatbot() {
 
       setMessages(prev => [...prev, assistantMessage])
       setIsLoading(false)
-    }, 1500)
+    }, 1000)
   }
 
   const handleVoiceInput = () => {
@@ -97,34 +116,16 @@ export default function FloatingChatbot() {
     recognition.continuous = false
     recognition.interimResults = false
 
-    recognition.onstart = () => {
-      setIsListening(true)
-    }
-
+    recognition.onstart = () => setIsListening(true)
     recognition.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript
       setInputText(transcript)
       setIsListening(false)
     }
-
-    recognition.onerror = () => {
-      setIsListening(false)
-    }
-
-    recognition.onend = () => {
-      setIsListening(false)
-    }
-
+    recognition.onerror = () => setIsListening(false)
+    recognition.onend = () => setIsListening(false)
     recognition.start()
   }
-
-  const quickQuestions = [
-    "How to post on Facebook?",
-    "Send photos on WhatsApp",
-    "Video call my family",
-    "What is Instagram?",
-    "Make my account safe"
-  ]
 
   return (
     <>
@@ -167,7 +168,7 @@ export default function FloatingChatbot() {
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((message) => (
+            {messages.map(message => (
               <div
                 key={message.id}
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -180,15 +181,13 @@ export default function FloatingChatbot() {
                   }`}
                 >
                   <div className="whitespace-pre-wrap text-sm">{message.text}</div>
-                  <div className={`text-xs mt-1 ${
-                    message.sender === 'user' ? 'text-blue-200' : 'text-gray-500'
-                  }`}>
+                  <div className={`text-xs mt-1 ${message.sender === 'user' ? 'text-blue-200' : 'text-gray-500'}`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
               </div>
             ))}
-            
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-gray-100 text-gray-800 rounded-2xl rounded-bl-none p-3">
@@ -200,22 +199,34 @@ export default function FloatingChatbot() {
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Questions */}
           <div className="border-t border-gray-200 p-3">
             <p className="text-xs text-gray-600 mb-2">Quick questions:</p>
-            <div className="flex flex-wrap gap-1 text-">
+            <div className="flex flex-wrap gap-1">
               {quickQuestions.map((question, index) => (
                 <button
                   key={index}
                   onClick={() => {
-                    setInputText(question)
-                    setTimeout(handleSend, 100)
+                    const answer = quickAnswers[question.toLowerCase()] || "Sorry, I don't have an answer for that."
+                    const userMessage: Message = {
+                      id: Date.now().toString(),
+                      text: question,
+                      sender: 'user',
+                      timestamp: new Date()
+                    }
+                    const assistantMessage: Message = {
+                      id: (Date.now() + 1).toString(),
+                      text: answer,
+                      sender: 'assistant',
+                      timestamp: new Date()
+                    }
+                    setMessages(prev => [...prev, userMessage, assistantMessage])
                   }}
-                  className="bg-blue-600 text-black px-2 py-1 rounded-full text-xs hover:bg-blue-700 transition"
+                  className="bg-blue-600 text-white px-2 py-1 rounded-full text-xs hover:bg-blue-700 transition"
                 >
                   {question}
                 </button>
@@ -230,26 +241,22 @@ export default function FloatingChatbot() {
                 <input
                   type="text"
                   value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                  onChange={e => setInputText(e.target.value)}
+                  onKeyPress={e => e.key === 'Enter' && handleSend()}
                   placeholder="Ask about social media..."
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500 text-sm"
                 />
-                
+
                 {/* Voice Input Button */}
                 <button
                   onClick={handleVoiceInput}
                   disabled={isListening}
-                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 ${
-                    isListening ? 'text-red-500' : 'text-gray-400 hover:text-blue-600'
-                  }`}
+                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 ${isListening ? 'text-red-500' : 'text-gray-400 hover:text-blue-600'}`}
                 >
-                  <span className="text-lg">
-                    {isListening ? '🔴' : '🎤'}
-                  </span>
+                  <span className="text-lg">{isListening ? '🔴' : '🎤'}</span>
                 </button>
               </div>
-              
+
               <button
                 onClick={handleSend}
                 disabled={!inputText.trim() || isLoading}
@@ -258,7 +265,7 @@ export default function FloatingChatbot() {
                 Send
               </button>
             </div>
-            
+
             {isListening && (
               <div className="text-center mt-2">
                 <div className="text-red-500 font-semibold text-sm">Listening... Speak now</div>

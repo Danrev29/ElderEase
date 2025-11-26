@@ -16,10 +16,12 @@ import tutorials from '@/app/tutoriallibrary/tutorialData' // adjust path
 interface UserProfile {
   id: string
   name: string
-  email: string
+  email: string | null   // allow null
   phone: string
   profilePhoto?: string
+  pendingEmail?: string
 }
+
 
 export default function Profile() {
   const router = useRouter()
@@ -38,6 +40,34 @@ export default function Profile() {
   const totalTutorials = tutorials.length
 
   useEffect(() => { loadUserProfile() }, [])
+
+  // Auto-update Firestore email after verification
+ useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    if (user && user.email) {
+      const userId = user.uid
+      const snap = await getDoc(doc(db, 'users', userId))
+      if (snap.exists()) {
+        const userData = snap.data()
+        if (userData.pendingEmail && user.email === userData.pendingEmail) {
+          await setDoc(doc(db, 'users', userId), {
+            email: user.email,
+            pendingEmail: undefined  // use undefined for optional field
+          }, { merge: true })
+
+        setProfile(prev => ({
+  ...prev,
+  email: user.email ?? '', // fallback to empty string if null
+  pendingEmail: undefined
+}))
+
+        }
+      }
+    }
+  })
+  return () => unsubscribe()
+}, [])
+
 
   const loadUserProfile = async () => {
     try {
@@ -99,7 +129,6 @@ export default function Profile() {
       formData.append('file', file);
       formData.append('upload_preset', 'unsigned_preset'); // e.g., 'profile_upload'
 
-      // Replace with your Cloud name
       const cloudName = 'dv6kpdk7n';
 
       const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
@@ -132,16 +161,25 @@ export default function Profile() {
     e.preventDefault();
     if (!auth.currentUser) return setMessage('No logged-in user.');
     if (!emailData.newEmail || !emailData.currentPassword) return setMessage('Fill in both fields.');
+    if (emailData.newEmail === profile.email) return setMessage('New email is the same as current.');
 
     try {
       const credential = EmailAuthProvider.credential(auth.currentUser.email!, emailData.currentPassword);
       await reauthenticateWithCredential(auth.currentUser, credential);
+
+      // Send verification email to new email
       await verifyBeforeUpdateEmail(auth.currentUser, emailData.newEmail);
 
+      // Save pending email in Firestore
       const userId = profile.id;
-      if (userId) await setDoc(doc(db, 'users', userId), { email: emailData.newEmail }, { merge: true });
+      if (userId) {
+        await setDoc(doc(db, 'users', userId), {
+          pendingEmail: emailData.newEmail
+        }, { merge: true });
+      }
 
-      setMessage('Verification email sent. Logging out in 3 seconds...');
+      setMessage('Verification email sent! Please check your inbox.');
+
       setTimeout(async () => {
         localStorage.clear();
         await signOut(auth);
@@ -189,8 +227,8 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-white py-10 px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-  {/* Left Column: Profile */}
-  <div className="md:col-span-1 space-y-6">
+      {/* Left Column: Profile */}
+      <div className="md:col-span-1 space-y-6">
         <div className="p-6 bg-white rounded-3xl shadow-lg border border-gray-200">
           <div className="flex justify-between items-center mb-6">
             <button onClick={() => router.push('/')} className="text-blue-500 font-medium hover:underline">← Home</button>
@@ -230,16 +268,29 @@ export default function Profile() {
             ))}
 
             {isEditing ? (
-              <form onSubmit={handleSaveProfile} className="flex justify-between mt-4">
-                <button
-                  type="submit"
-                  className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition flex items-center justify-center"
-                  disabled={isSaving}
-                >
-                  {isSaving ? 'Saving...' : 'Save'}
-                </button>
-              </form>
-            ) : (
+  <form onSubmit={handleSaveProfile} className="flex justify-between mt-4 gap-3">
+
+    {/* Save Button */}
+    <button
+      type="submit"
+      className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition flex-1"
+      disabled={isSaving}
+    >
+      {isSaving ? 'Saving...' : 'Save'}
+    </button>
+
+    {/* Cancel Button */}
+    <button
+      type="button"
+      onClick={() => setIsEditing(false)}
+      className="bg-gray-300 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-400 transition flex-1"
+    >
+      Cancel
+    </button>
+
+  </form>
+) : (
+
               <button type="button" onClick={() => setIsEditing(true)} className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition mt-4">
                 Edit Profile
               </button>
@@ -249,29 +300,60 @@ export default function Profile() {
           {/* Email & Password */}
           <div className="mt-6 pt-6 border-t space-y-4">
             {/* Email Change */}
-            <div>
-              <button 
-                onClick={() => setIsChangingEmail(!isChangingEmail)} 
-                className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600 transition w-full mb-2"
-              >
-                {isChangingEmail ? 'Cancel Email Change' : 'Change Email'}
-              </button>
+           {/* Email Change */}
+<div>
+  <button 
+    onClick={() => setIsChangingEmail(!isChangingEmail)} 
+    className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition w-full mb-2"
+  >
+    {isChangingEmail ? 'Cancel Email Change' : 'Change Email'}
+  </button>
 
-              {isChangingEmail && (
-                <form onSubmit={handleEmailChange} className="space-y-2 text-black">
-                  <input type="email" value={profile.email} readOnly className="mt-1 w-full px-3 py-2 rounded-xl border border-gray-300 bg-gray-100 cursor-not-allowed focus:outline-none transition" />
-                  <input type="email" placeholder="New Email" value={emailData.newEmail} onChange={(e) => setEmailData({ ...emailData, newEmail: e.target.value })} className="mt-1 w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" required />
-                  <input type="password" placeholder="Current Password" value={emailData.currentPassword} onChange={(e) => setEmailData({ ...emailData, currentPassword: e.target.value })} className="mt-1 w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition" required />
-                  <button type="submit" className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600 transition w-full">Update Email</button>
-                </form>
-              )}
-            </div>
+  {isChangingEmail && (
+    <form onSubmit={handleEmailChange} className="space-y-2 text-black">
+      <input
+        type="email"
+        value={profile.email ?? ''}
+        readOnly
+        className="mt-1 w-full px-3 py-2 rounded-xl border border-gray-300 bg-gray-100 cursor-not-allowed focus:outline-none transition"
+      />
+      <input
+        type="email"
+        placeholder="New Email"
+        value={emailData.newEmail}
+        onChange={(e) => setEmailData({ ...emailData, newEmail: e.target.value })}
+        className="mt-1 w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+        required
+      />
+      <input
+        type="password"
+        placeholder="Current Password"
+        value={emailData.currentPassword}
+        onChange={(e) => setEmailData({ ...emailData, currentPassword: e.target.value })}
+        className="mt-1 w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+        required
+      />
+      <button
+        type="submit"
+        className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition w-full"
+      >
+        Update Email
+      </button>
+
+      {/* Verification note */}
+      <p className="text-sm text-gray-600 mt-1">
+        Note: You need to verify the new email address via the email sent to you for the change to take effect.
+      </p>
+    </form>
+  )}
+</div>
+
 
             {/* Password Change */}
             <div>
               <button 
                 onClick={() => setIsChangingPassword(!isChangingPassword)} 
-                className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-600 transition w-full mb-2"
+                className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition w-full mb-2"
               >
                 {isChangingPassword ? 'Cancel Password Change' : 'Change Password'}
               </button>
@@ -292,64 +374,80 @@ export default function Profile() {
       </div>
 
       {/* Right Column: Progress / Motivation */}
-    {/* Right Column: Progress / Motivation */}
-  <div className="md:col-span-3 sticky top-8 space-y-6">
-  <div className="p-6 bg-gray-50 rounded-2xl shadow-lg border border-gray-200">
-    <h2 className="text-xl font-bold mb-4">Learning Progress</h2>
+      <div className="md:col-span-3 sticky top-8 space-y-6">
+        <div className="p-6 bg-gray-50 rounded-2xl shadow-lg border border-gray-200">
+          <h2 className="text-xl font-bold mb-4">Learning Progress</h2>
 
-    {/* Progress Bar */}
-    <div className="mb-4">
-      <div className="flex justify-between mb-1 text-sm text-gray-600">
-        <span>Completed Tutorials</span>
-        <span>{completed.length} / {totalTutorials}</span>
-      </div>
-      <div className="w-full h-4 bg-gray-200 rounded-full">
-        <div
-          className="h-4 bg-green-500 rounded-full transition-all"
-          style={{ width: `${(completed.length / totalTutorials) * 100}%` }}
-        />
-      </div>
-    </div>
+          {/* Progress Bar */}
+          <div className="mb-4">
+            <div className="flex justify-between mb-1 text-sm text-gray-600">
+              <span>Completed Tutorials</span>
+              <span>{completed.length} / {totalTutorials}</span>
+            </div>
+            <div className="w-full h-4 bg-gray-200 rounded-full">
+              <div
+                className="h-4 bg-green-500 rounded-full transition-all"
+                style={{ width: `${(completed.length / totalTutorials) * 100}%` }}
+              />
+            </div>
+          </div>
 
-    {/* Visual Badges */}
-    <div className="mb-4">
-      <h3 className="font-semibold mb-2">Achievements</h3>
-      <div className="flex flex-wrap gap-2">
-        {completed.length >= 1 && (
-          <div className="flex items-center gap-1 bg-yellow-100 px-2 py-1 rounded-full text-sm">
-            🏅 <span>First Steps</span>
+          {/* Visual Badges */}
+          <div className="mb-4">
+            <h3 className="font-semibold mb-2">Achievements</h3>
+            <div className="flex flex-wrap gap-2">
+              {completed.length >= 1 && (
+                <div className="flex items-center gap-1 bg-yellow-100 px-2 py-1 rounded-full text-sm">
+                  🏅 <span>First Steps</span>
+                </div>
+              )}
+              {completed.length >= 5 && (
+                <div className="flex items-center gap-1 bg-green-100 px-2 py-1 rounded-full text-sm">
+                  🎯 <span>5 Tutorials Completed</span>
+                </div>
+              )}
+              {completed.length >= 10 && (
+                <div className="flex items-center gap-1 bg-blue-100 px-2 py-1 rounded-full text-sm">
+                  🏆 <span>10 Tutorials Completed</span>
+                </div>
+              )}
+              {completed.length === 0 && (
+                <div className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-full text-sm text-gray-500">
+                  ⚪ No badges yet
+                </div>
+              )}
+            </div>
           </div>
-        )}
-        {completed.length >= 5 && (
-          <div className="flex items-center gap-1 bg-green-100 px-2 py-1 rounded-full text-sm">
-            🎯 <span>5 Tutorials Completed</span>
-          </div>
-        )}
-        {completed.length >= 10 && (
-          <div className="flex items-center gap-1 bg-blue-100 px-2 py-1 rounded-full text-sm">
-            🏆 <span>10 Tutorials Completed</span>
-          </div>
-        )}
-        {completed.length === 0 && (
-          <div className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-full text-sm text-gray-500">
-            ⚪ No badges yet
-          </div>
-        )}
-      </div>
-    </div>
+          
 
-    {/* Motivational messages */}
-    <div className="mb-2">
-      <h3 className="font-semibold mb-2">Motivation</h3>
-      <ul className="list-disc list-inside text-gray-700 text-sm">
-        {completed.length === 0 && <li>✨ Start your first tutorial today!</li>}
-        {completed.length > 0 && completed.length < totalTutorials && <li>🚀 Keep going! You’re making progress.</li>}
-        {completed.length === totalTutorials && <li>🎉 Amazing! You completed all tutorials!</li>}
-      </ul>
+          {/* Motivational messages */}
+          <div className="mb-2">
+            <h3 className="font-semibold mb-2">Motivation</h3>
+            <ul className="list-disc list-inside text-gray-700 text-sm">
+              {completed.length === 0 && <li>✨ Start your first tutorial today!</li>}
+              {completed.length > 0 && completed.length < totalTutorials && <li>🚀 Keep going! You’re making progress.</li>}
+              {completed.length === totalTutorials && <li>🎉 Amazing! You completed all tutorials!</li>}
+            </ul>
+          </div>
+          <div className="mt-6">
+  <h3 className="font-semibold mb-2">Bookmarked Tutorials</h3>
+  {favorites.length === 0 ? (
+    <p className="text-gray-500 text-sm">No favorites yet.</p>
+  ) : (
+    <div className="flex flex-wrap gap-2">
+      {favorites.map(favId => {
+        const tutorial = tutorials.find(t => t.id === favId);
+        if (!tutorial) return null;
+        return (
+          <span key={favId} className="bg-yellow-100 px-2 py-1 rounded-full text-sm">{tutorial.title}</span>
+        );
+      })}
     </div>
-  </div>
+  )}
 </div>
 
+        </div>
+      </div>
     </div>
   )
 }
