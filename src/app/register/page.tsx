@@ -218,7 +218,7 @@ export default function Register() {
         <div className="px-6 pb-6 text-center">
           <p className="text-gray-600">
             Already have an account?{' '}
-            <a href="/login" className="text-blue-600 hover:bg-green-700 bg-green-600 px-2 py-1 rounded font-semibold text-lg">
+            <a href="/login" className="text-green-600 hover:text-green-700  px-2 py-1 rounded font-semibold text-lg">
               Sign in here
             </a>
           </p>
