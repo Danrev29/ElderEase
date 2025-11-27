@@ -40,23 +40,20 @@ export function getTutorialAnswer(platform: string, topic?: string): string {
       return { tutorial: t, score }
     })
 
-    // Pick the tutorial with the highest score
     scoredTutorials.sort((a, b) => b.score - a.score)
     tutorial = scoredTutorials[0].tutorial
   } else {
-    tutorial = filtered[0] // Default to first tutorial if topic not specified
+    tutorial = filtered[0]
   }
 
-  // Build response
-  let response = `Tutorial: ${tutorial.title}\nDescription: ${tutorial.description}\nSteps:\n`
-  tutorial.steps.forEach((step, index) => {
-    response += `${index + 1}. ${step.text}`
-    if (step.image) response += ` [Image: ${step.image}]`
-    response += `\n`
-  })
+  // Build response WITHOUT images, video, or links
+  let response = `Tutorial: ${tutorial.title}\n`
+  response += `Description: ${tutorial.description}\n`
+  response += `Steps:\n`
 
-  if (tutorial.video) response += `Video: ${tutorial.video}\n`
-  if (tutorial.link) response += `Link: ${tutorial.link}\n`
+  tutorial.steps.forEach((step, index) => {
+    response += `${index + 1}. ${step.text}\n`
+  })
 
   return response
 }

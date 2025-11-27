@@ -131,7 +131,7 @@ const tutorials = [
     category: "Instagram",
     image: "https://tse4.mm.bing.net/th/id/OIP._ZYtCLwJgEqV1bpMdAI23wHaFQ?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Connect with friends and favorite accounts.",
-    video: "/videos/instagram4.mp4",
+    video: "",
     link: "https://www.instagram.com",
     steps: [
       { text: "Use the search tab to find people", image: "/placeholder.png" },
@@ -145,7 +145,7 @@ const tutorials = [
     category: "Instagram",
     image: "https://tse4.mm.bing.net/th/id/OIP._ZYtCLwJgEqV1bpMdAI23wHaFQ?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Create short, fun videos with Reels.",
-    video: "/videos/instagram5.mp4",
+    video: "",
     link: "https://www.instagram.com",
     steps: [
       { text: "Tap the Reels icon", image: "/placeholder.png"},
@@ -162,7 +162,7 @@ const tutorials = [
     category: "WhatsApp",
     image: "https://tse2.mm.bing.net/th/id/OIP.rVT3Wm60UZubSjyX_QGUgQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Step-by-step messaging guide.",
-    video: "/videos/whatsapp1.mp4",
+    video: "",
     link: "https://www.whatsapp.com",
     steps: [
       { text: "Open WhatsApp app", image: "/placeholder.png" },
@@ -178,7 +178,7 @@ const tutorials = [
     category: "WhatsApp",
     image: "https://tse2.mm.bing.net/th/id/OIP.rVT3Wm60UZubSjyX_QGUgQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Learn voice and video calls easily.",
-    video: "/videos/whatsapp2.mp4",
+video: "",
     link: "https://www.whatsapp.com",
     steps: [
       { text: "Open a chat with a contact", image: "/placeholder.png" },
@@ -192,7 +192,7 @@ const tutorials = [
     category: "WhatsApp",
     image: "https://tse2.mm.bing.net/th/id/OIP.rVT3Wm60UZubSjyX_QGUgQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Communicate with multiple people at once.",
-    video: "/videos/whatsapp3.mp4",
+  video: "",
     link: "https://www.whatsapp.com",
     steps: [
       { text: "Go to the 'Chats' tab", image: "/placeholder.png" },
@@ -207,7 +207,7 @@ const tutorials = [
     category: "WhatsApp",
     image: "https://tse2.mm.bing.net/th/id/OIP.rVT3Wm60UZubSjyX_QGUgQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Record and send voice messages easily.",
-    video: "/videos/whatsapp4.mp4",
+ video: "",
     link: "https://www.whatsapp.com",
     steps: [
       { text: "Open a chat", image: "/placeholder.png" },
@@ -221,7 +221,7 @@ const tutorials = [
     category: "WhatsApp",
     image: "https://tse2.mm.bing.net/th/id/OIP.rVT3Wm60UZubSjyX_QGUgQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "Send documents, photos, and videos in chats.",
-    video: "/videos/whatsapp5.mp4",
+  video: "",
     link: "https://www.whatsapp.com",
     steps: [
       { text: "Open the chat", image: "/placeholder.png" },
@@ -238,7 +238,7 @@ const tutorials = [
     category: "Messenger",
     image: "https://logos-world.net/wp-content/uploads/2021/02/Facebook-Messenger-Logo-2020-present.jpg",
     description: "Beginner-friendly messaging guide.",
-    video: "/videos/messenger1.mp4",
+   video: "",
     link: "https://www.messenger.com",
     steps: [
       { text: "Open Messenger app", image: "/placeholder.png" },
@@ -253,7 +253,7 @@ const tutorials = [
     category: "Messenger",
     image: "https://logos-world.net/wp-content/uploads/2021/02/Facebook-Messenger-Logo-2020-present.jpg",
     description: "Connect face-to-face with friends.",
-    video: "/videos/messenger2.mp4",
+   video: "",
     link: "https://www.messenger.com",
     steps: [
       { text: "Open a chat", image: "/placeholder.png" },
@@ -267,7 +267,7 @@ const tutorials = [
     category: "Messenger",
     image: "https://logos-world.net/wp-content/uploads/2021/02/Facebook-Messenger-Logo-2020-present.jpg",
     description: "Make conversations fun with stickers.",
-    video: "/videos/messenger3.mp4",
+    video: "",
     link: "https://www.messenger.com",
     steps: [
       { text: "Open a chat", image: "/placeholder.png" },
@@ -281,7 +281,7 @@ const tutorials = [
     category: "Messenger",
     image: "https://logos-world.net/wp-content/uploads/2021/02/Facebook-Messenger-Logo-2020-present.jpg",
     description: "Chat with multiple friends simultaneously.",
-    video: "/videos/messenger4.mp4",
+   video: "",
     link: "https://www.messenger.com",
     steps: [
       { text: "Tap 'New Group'", image: "/placeholder.png" },
@@ -295,7 +295,7 @@ const tutorials = [
     category: "Messenger",
     image: "https://logos-world.net/wp-content/uploads/2021/02/Facebook-Messenger-Logo-2020-present.jpg",
     description: "Control when and how you get alerts.",
-    video: "/videos/messenger5.mp4",
+    video: "",
     link: "https://www.messenger.com",
     steps: [
       { text: "Go to Settings > Notifications", image: "/placeholder.png" },
@@ -311,7 +311,7 @@ const tutorials = [
   category: "YouTube",
   image: "https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo-2017-present.jpg",
   description: "Learn how to find videos easily.",
-  video: "/videos/youtube1.mp4",
+  video: "",
   link: "https://www.youtube.com",
   steps: [
     { text: "Go to youtube.com or open the app", image: "/placeholder.png" },
@@ -326,7 +326,7 @@ const tutorials = [
   category: "YouTube",
   image: "https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo-2017-present.jpg",
   description: "Follow your favorite creators.",
-  video: "/videos/youtube2.mp4",
+video: "",
   link: "https://www.youtube.com",
   steps: [
     { text: "Open a video from the channel", image: "/placeholder.png" },
@@ -340,7 +340,7 @@ const tutorials = [
   category: "YouTube",
   image: "https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo-2017-present.jpg",
   description: "Engage with content creators easily.",
-  video: "/videos/youtube3.mp4",
+  video: "",
   link: "https://www.youtube.com",
   steps: [
     { text: "Open a YouTube video", image: "/placeholder.png" },
@@ -355,7 +355,7 @@ const tutorials = [
   category: "YouTube",
   image: "https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo-2017-present.jpg",
   description: "Organize videos into playlists.",
-  video: "/videos/youtube4.mp4",
+  video: "",
   link: "https://www.youtube.com",
   steps: [
     { text: "Click 'Save' below a video", image: "/placeholder.png" },
@@ -370,7 +370,7 @@ const tutorials = [
   category: "YouTube",
   image: "https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo-2017-present.jpg",
   description: "Share your own videos with the world.",
-  video: "/videos/youtube5.mp4",
+ video: "",
   link: "https://www.youtube.com",
   steps: [
     { text: "Click the camera icon with '+'", image: "/placeholder.png"},
@@ -388,7 +388,7 @@ const tutorials = [
   category: "TikTok",
   image: "https://pngimg.com/uploads/tiktok/tiktok_PNG17.png",
   description: "Beginner's guide to TikTok setup.",
-  video: "/videos/tiktok1.mp4",
+ video: "",
   link: "https://www.tiktok.com",
   steps: [
     { text: "Download TikTok from App Store/Play Store", image: "/placeholder.png" },
@@ -403,7 +403,7 @@ const tutorials = [
   category: "TikTok",
   image: "https://pngimg.com/uploads/tiktok/tiktok_PNG17.png",
   description: "Step-by-step video upload guide.",
-  video: "/videos/tiktok2.mp4",
+ video: "",
   link: "https://www.tiktok.com",
   steps: [
     { text: "Tap '+' at the bottom", image: "/placeholder.png" },
@@ -418,7 +418,7 @@ const tutorials = [
   category: "TikTok",
   image: "https://pngimg.com/uploads/tiktok/tiktok_PNG17.png",
   description: "Discover and follow your favorite creators.",
-  video: "/videos/tiktok3.mp4",
+ video: "",
   link: "https://www.tiktok.com",
   steps: [
     { text: "Open TikTok and search for a user", image: "/placeholder.png" },
@@ -432,7 +432,7 @@ const tutorials = [
   category: "TikTok",
   image: "https://pngimg.com/uploads/tiktok/tiktok_PNG17.png",
   description: "Engage with TikTok videos easily.",
-  video: "/videos/tiktok4.mp4",
+video: "",
   link: "https://www.tiktok.com",
   steps: [
     { text: "Watch a video", image: "/placeholder.png" },
@@ -446,7 +446,7 @@ const tutorials = [
   category: "TikTok",
   image: "https://pngimg.com/uploads/tiktok/tiktok_PNG17.png",
   description: "Add fun effects to your videos.",
-  video: "/videos/tiktok5.mp4",
+  video: "",
   link: "https://www.tiktok.com",
   steps: [
     { text: "Open the TikTok camera", image: "/placeholder.png" },
@@ -464,7 +464,7 @@ const tutorials = [
   category: "X",
   image: "https://tse2.mm.bing.net/th/id/OIP.TD1sz3urAFOfFe42OrGbqQHaE8?w=900&h=600&rs=1&pid=ImgDetMain&o=7&rm=3",
   description: "Step-by-step setup for beginners.",
-  video: "/videos/x1.mp4",
+video: "",
   link: "https://www.x.com",
   steps: [
     { text: "Go to x.com or open the app", image: "/placeholder.png" },
@@ -479,7 +479,7 @@ const tutorials = [
   category: "X",
   image: "https://tse2.mm.bing.net/th/id/OIP.TD1sz3urAFOfFe42OrGbqQHaE8?w=900&h=600&rs=1&pid=ImgDetMain&o=7&rm=3",
   description: "Post updates and messages easily.",
-  video: "/videos/x2.mp4",
+ video: "",
   link: "https://www.x.com",
   steps: [
     { text: "Click the Post button", image: "/placeholder.png" },
@@ -493,7 +493,7 @@ const tutorials = [
   category: "X",
   image: "https://tse2.mm.bing.net/th/id/OIP.TD1sz3urAFOfFe42OrGbqQHaE8?w=900&h=600&rs=1&pid=ImgDetMain&o=7&rm=3",
   description: "Engage with posts quickly.",
-  video: "/videos/x3.mp4",
+video: "",
   link: "https://www.x.com",
   steps: [
     { text: "Click the Repost icon to share", image: "/placeholder.png" },
@@ -506,7 +506,7 @@ const tutorials = [
   category: "X",
   image: "https://tse2.mm.bing.net/th/id/OIP.TD1sz3urAFOfFe42OrGbqQHaE8?w=900&h=600&rs=1&pid=ImgDetMain&o=7&rm=3",
   description: "Keep up with interesting people.",
-  video: "/videos/x4.mp4",
+ video: "",
   link: "https://www.x.com",
   steps: [
     { text: "Search for an account", image: "/placeholder.png" },
@@ -519,7 +519,7 @@ const tutorials = [
   category: "X",
   image: "https://tse2.mm.bing.net/th/id/OIP.TD1sz3urAFOfFe42OrGbqQHaE8?w=900&h=600&rs=1&pid=ImgDetMain&o=7&rm=3",
   description: "Discover topics and trends.",
-  video: "/videos/x5.mp4",
+video: "",
   link: "https://www.x.com",
   steps: [
     { text: "Add '#' before keywords in posts", image: "/placeholder.png" },
@@ -537,7 +537,7 @@ const tutorials = [
   category: "Snapchat",
   image: "https://logos-world.net/wp-content/uploads/2020/06/Snapchat-Logo.jpg",
   description: "Beginner's guide to Snapchat.",
-  video: "/videos/snapchat1.mp4",
+video: "",
   link: "https://www.snapchat.com",
   steps: [
     { text: "Download Snapchat and tap Sign Up", image: "/placeholder.png" },
@@ -552,7 +552,7 @@ const tutorials = [
   category: "Snapchat",
   image: "https://logos-world.net/wp-content/uploads/2020/06/Snapchat-Logo.jpg",
   description: "Connect with friends quickly.",
-  video: "/videos/snapchat2.mp4",
+ video: "",
   link: "https://www.snapchat.com",
   steps: [
     { text: "Open Snapchat and tap 'Add Friends'", image: "/placeholder.png" },
@@ -566,7 +566,7 @@ const tutorials = [
   category: "Snapchat",
   image: "https://logos-world.net/wp-content/uploads/2020/06/Snapchat-Logo.jpg",
   description: "Learn to send photos and videos.",
-  video: "/videos/snapchat3.mp4",
+video: "",
   link: "https://www.snapchat.com",
   steps: [
     { text: "Take a photo or video with the camera", image: "/placeholder.png" },
@@ -580,7 +580,7 @@ const tutorials = [
   category: "Snapchat",
   image: "https://logos-world.net/wp-content/uploads/2020/06/Snapchat-Logo.jpg",
   description: "Make your snaps creative and fun.",
-  video: "/videos/snapchat4.mp4",
+ video: "",
   link: "https://www.snapchat.com",
   steps: [
     { text: "Swipe left or right to apply filters", image: "/placeholder.png" },
@@ -594,7 +594,7 @@ const tutorials = [
   category: "Snapchat",
   image: "https://logos-world.net/wp-content/uploads/2020/06/Snapchat-Logo.jpg",
   description: "Send instant messages easily.",
-  video: "/videos/snapchat5.mp4",
+ video: "",
   link: "https://www.snapchat.com",
   steps: [
     { text: "Open chat from friends list", image: "/placeholder.png" },

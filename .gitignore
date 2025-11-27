@@ -3,5 +3,11 @@ node_modules/
 .next/
 dist/
 
-# Ignore Firebase service account key
+# Ignore Firebase service account key file
 src/lib/serviceAccountKey.json
+
+# Ignore environment variables
+.env
+.env.local
+.env.development
+.env.production

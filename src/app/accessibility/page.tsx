@@ -1,9 +1,33 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useAccessibility } from '@/context/AccessibilityContext'
 
 export default function Accessibility() {
   const { fontSize, contrast, voiceEnabled, setSettings } = useAccessibility()
+  const [loading, setLoading] = useState(true)
+
+  // Simulate data loading
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 800) // adjust time as needed
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-8 animate-pulse">
+        <div className="container mx-auto max-w-4xl space-y-6">
+          <div className="bg-gray-200 h-24 rounded-2xl w-full"></div>
+          <div className="bg-gray-200 h-6 rounded w-3/4"></div>
+          <div className="bg-gray-200 h-6 rounded w-1/2"></div>
+
+          <div className="bg-gray-200 h-32 rounded-2xl w-full"></div>
+          <div className="bg-gray-200 h-32 rounded-2xl w-full"></div>
+          <div className="bg-gray-200 h-32 rounded-2xl w-full"></div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -15,7 +39,6 @@ export default function Accessibility() {
           </div>
 
           <div className="p-6 space-y-6">
-
             {/* Text Size */}
             <div className="border border-gray-200 rounded-lg p-4">
               <label className="text-lg font-medium text-gray-800 mb-2 block">
@@ -75,7 +98,6 @@ export default function Accessibility() {
                 </button>
               </div>
 
-              {/* 🎤 Command List */}
               {voiceEnabled && (
                 <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <h3 className="font-semibold text-blue-800">Available Voice Commands:</h3>
@@ -106,7 +128,6 @@ export default function Accessibility() {
                 </p>
               )}
             </div>
-
           </div>
         </div>
       </div>

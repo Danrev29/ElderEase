@@ -16,6 +16,8 @@ export default function TutorialLibrary() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [loadingData, setLoadingData] = useState(true) // New loading state
+  const [viewMode, setViewMode] = useState<'all' | 'favorites' | 'completed'>('all')
+
 
   const [user, loading, error] = useAuthState(auth);
 
@@ -98,10 +100,21 @@ export default function TutorialLibrary() {
 
   if (!user) return <p className="text-center mt-20 text-xl">Please log in to access tutorials.</p>;
 
-  const filteredTutorials = tutorials.filter(t =>
-    (filter === 'All' || t.category === filter) &&
-    t.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredTutorials = tutorials.filter(t => {
+  const matchesCategory =
+    filter === 'All' || t.category === filter;
+
+  const matchesSearch =
+    t.title.toLowerCase().includes(search.toLowerCase());
+
+  const matchesViewMode =
+    viewMode === 'all' ||
+    (viewMode === 'favorites' && favorites.includes(t.id)) ||
+    (viewMode === 'completed' && completed.includes(t.id));
+
+  return matchesCategory && matchesSearch && matchesViewMode;
+});
+
 
   return (
     <div className="bg-white min-h-screen w-full p-4 sm:p-8 relative">
@@ -116,6 +129,28 @@ export default function TutorialLibrary() {
           Completed {completed.length} / {tutorials.length} tutorials &nbsp;|&nbsp; 
           Bookmarked {favorites.length}
         </p>
+<div className="flex flex-wrap gap-3 mb-6">
+
+
+  <button
+    className={`px-4 py-2 rounded-lg text-sm font-medium transition
+      ${viewMode === 'completed' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'}
+    `}
+    onClick={() => setViewMode(viewMode === 'completed' ? 'all' : 'completed')}
+  >
+    ✔ Show Completed
+  </button>
+
+    <button
+    className={`px-4 py-2 rounded-lg text-sm font-medium transition
+      ${viewMode === 'favorites' ? 'bg-yellow-400 text-white' : 'bg-gray-200 text-gray-700'}
+    `}
+    onClick={() => setViewMode(viewMode === 'favorites' ? 'all' : 'favorites')}
+  >
+    ⭐ Show Bookmarked
+  </button>
+</div>
+
 
         {/* Search + Filters */}
         <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8 relative">
@@ -174,7 +209,7 @@ export default function TutorialLibrary() {
             key={tutorial.id}
             className={`rounded-xl cursor-pointer p-5 flex flex-col transition shadow-lg hover:shadow-2xl border
               ${completed.includes(tutorial.id)
-                ? 'border-green-500 bg-green-50 shadow-green-300 shadow-lg'
+                ? 'border-green-500 bg-green-50 '
                 : 'bg-white border-gray-100'
               }
             `}

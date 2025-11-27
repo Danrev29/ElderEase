@@ -1,17 +1,15 @@
-import admin from 'firebase-admin';
-import serviceAccountJson from './serviceAccountKey.json';
-import { ServiceAccount } from 'firebase-admin';
+import admin from "firebase-admin";
 
-const serviceAccount = {
-  ...serviceAccountJson,
-  private_key: serviceAccountJson.private_key.replace(/\\n/g, '\n'),
-} as ServiceAccount;
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT || "{}");
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+      projectId: serviceAccount.project_id,
+      clientEmail: serviceAccount.client_email,
+      privateKey: serviceAccount.private_key.replace(/\\n/g, "\n"),
+    }),
   });
 }
 
-export const adminAuth = admin.auth();
-export const adminDb = admin.firestore();
+export const adminDB = admin.firestore();

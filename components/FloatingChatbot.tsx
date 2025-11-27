@@ -36,7 +36,7 @@ export default function FloatingChatbot() {
 
   // Quick questions and mapped answers
   const quickQuestions = [
-    "How to post on Facebook?",
+    "how to create facebook account?",
     "Send photos on WhatsApp",
     "Video call my family",
     "What is Instagram?",
@@ -44,12 +44,31 @@ export default function FloatingChatbot() {
   ]
 
   const quickAnswers: { [key: string]: string } = {
-    "how to post on facebook?": getTutorialAnswer("facebook", "post status"),
+    "how to create facebook account?": getTutorialAnswer("facebook", "post status"),
     "send photos on whatsapp": getTutorialAnswer("whatsapp", "send photo"),
-    "video call my family": getTutorialAnswer("video call"),
+    "video call my family": getTutorialAnswer("messenger", "video calls"),
     "what is instagram?": getTutorialAnswer("instagram"),
     "make my account safe": "To keep your account safe: 1) Use a strong password, 2) Enable two-factor authentication, 3) Avoid sharing personal info, 4) Keep your apps updated."
   }
+
+// Remove images, videos, and links from responses
+const sanitizeResponse = (text: string) => {
+  if (!text) return "";
+  
+  return text
+    // remove URLs
+    .replace(/https?:\/\/\S+/gi, "")
+    // remove markdown links: [text](url)
+    .replace(/\[([^\]]+)\]\((.*?)\)/g, "$1")
+    // remove <img> tags
+    .replace(/<img[^>]*>/gi, "")
+    // remove <video> tags
+    .replace(/<video[^>]*>[\s\S]*?<\/video>/gi, "")
+    // remove HTML links
+    .replace(/<a[^>]*>(.*?)<\/a>/gi, "$1")
+    .trim();
+};
+
 
   const handleSend = async () => {
     if (!inputText.trim()) return
@@ -94,12 +113,13 @@ export default function FloatingChatbot() {
         }
       }
 
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: response,
-        sender: 'assistant',
-        timestamp: new Date()
-      }
+    const assistantMessage: Message = {
+  id: (Date.now() + 1).toString(),
+  text: sanitizeResponse(response),
+  sender: 'assistant',
+  timestamp: new Date()
+}
+
 
       setMessages(prev => [...prev, assistantMessage])
       setIsLoading(false)
@@ -220,7 +240,7 @@ export default function FloatingChatbot() {
                     }
                     const assistantMessage: Message = {
                       id: (Date.now() + 1).toString(),
-                      text: answer,
+                      text: sanitizeResponse(answer),
                       sender: 'assistant',
                       timestamp: new Date()
                     }
