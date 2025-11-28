@@ -1,6 +1,6 @@
 // src/app/api/auth/register/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebaseAdmin';
+import { adminAuth, adminDB } from '@/lib/firebaseAdmin';
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     console.log('User created:', userRecord.uid);
 
     // Save additional info in Firestore
-    await adminDb.collection('users').doc(userRecord.uid).set({
+    await adminDB.collection('users').doc(userRecord.uid).set({
       id: userRecord.uid,
       email,
       name,

@@ -60,7 +60,7 @@ export default function Register() {
           localStorage.setItem('elderease_is_logged_in', 'true')
 
           // Redirect to homepage
-          router.push('/')
+          router.push('/login')
         } else {
           setErrors({ email: data.error || 'Registration failed' })
         }
